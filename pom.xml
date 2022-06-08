@@ -11,6 +11,7 @@
     <modules>
         <!--nacos config <null>?-->
         <module>kb-gateway</module>
+        <module>kb-video</module>
     </modules>
     <groupId>com.cloud</groupId>
     <artifactId>kb</artifactId>

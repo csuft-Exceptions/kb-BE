@@ -14,7 +14,7 @@ import reactor.core.publisher.Mono;
 
 import javax.annotation.Resource;
 
-@Component
+
 public class GlobalFilter implements org.springframework.cloud.gateway.filter.GlobalFilter, Ordered {
     private static final String AUTHORIZE_TOKEN = "token";
     private static final String AUTHORIZE_UID = "uid";
