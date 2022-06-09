@@ -14,6 +14,7 @@
     </parent>
 
     <dependencies>
+
         <!--阿里云oss-->
         <dependency>
             <groupId>com.aliyun.oss</groupId>

@@ -16,11 +16,6 @@
 <!--    <packaging>war</packaging>-->
 
     <dependencies>
-        <!--Redis-->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-redis</artifactId>
-        </dependency>
         <!--GateWay 网关-->
         <dependency>
             <groupId>org.springframework.cloud</groupId>

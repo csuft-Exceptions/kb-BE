@@ -32,7 +32,17 @@
     </properties>
 
     <dependencies>
-
+        <!--common-->
+        <dependency>
+            <groupId>com.example</groupId>
+            <artifactId>kb-common</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <!--Redis-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+        </dependency>
         <!--sentinel-->
         <dependency>
             <groupId>com.alibaba.csp</groupId>

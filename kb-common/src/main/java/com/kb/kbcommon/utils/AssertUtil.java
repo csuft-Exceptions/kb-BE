@@ -3,7 +3,7 @@ package com.kb.kbcommon.utils;
 import com.kb.kbcommon.exception.BusinessException;
 import lombok.SneakyThrows;
 
-public class AssertUtils {
+public class AssertUtil {
 
     //如果不是true，则抛异常
     @SneakyThrows
