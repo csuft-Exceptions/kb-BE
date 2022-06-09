@@ -26,6 +26,7 @@ public class Base64Util extends Base64 {
     //重载
     public static String encode(byte[] binaryData) {
         return Base64.getEncoder().encodeToString(binaryData);
+
     }
 
     /**
