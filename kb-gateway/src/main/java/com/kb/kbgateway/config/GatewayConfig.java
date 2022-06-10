@@ -1,6 +1,6 @@
-package com.kb.gateway.config;
+package com.kb.kbgateway.config;
 
-import com.kb.gateway.filter.GatewayFilter;
+import com.kb.kbgateway.filter.GatewayFilter;
 import org.springframework.cloud.gateway.route.RouteLocator;
 import org.springframework.cloud.gateway.route.builder.RouteLocatorBuilder;
 import org.springframework.context.annotation.Bean;

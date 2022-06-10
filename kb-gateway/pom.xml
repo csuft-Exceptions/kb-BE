@@ -3,10 +3,10 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.kb</groupId>
-    <artifactId>gateway</artifactId>
+    <artifactId>kb-gateway</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>gateway</name>
-    <description>gateway</description>
+    <name>kb-gateway</name>
+    <description>kb-gateway</description>
     <parent>
         <artifactId>kb</artifactId>
         <groupId>com.cloud</groupId>
@@ -61,7 +61,7 @@
     </dependencies>
 
     <build>
-        <finalName>gateway</finalName>
+        <finalName>kb-gateway</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -76,7 +76,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <mainClass>com.kb.gateway.GatewayApplication</mainClass>
+                    <mainClass>com.kb.kbgateway.GatewayApplication</mainClass>
                 </configuration>
                 <executions>
                     <execution>

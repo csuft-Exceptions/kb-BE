@@ -1,0 +1,8 @@
+# 应用名称
+spring:
+  application:
+    name: kb-oauth
+server:
+  port: 9002
+
+
