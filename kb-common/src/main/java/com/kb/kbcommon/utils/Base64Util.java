@@ -1,14 +1,20 @@
 package com.kb.kbcommon.utils;
 
 import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import lombok.SneakyThrows;
 
 import java.util.Base64;
 
-@AllArgsConstructor
+//@AllArgsConstructor
+//@NoArgsConstructor
 public class Base64Util extends Base64 {
 
     public static final String CODE_FORMAT = "UTF-8";
+
+    public Base64Util() {
+        super();
+    }
 
     /**
      * 编码

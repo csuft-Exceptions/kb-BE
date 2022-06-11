@@ -2,7 +2,13 @@
 spring:
   application:
     name: kb-oauth
+  redis:
+    host: localhost
+    password:
+    database: 0
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 8.140.48.121:8848
 server:
   port: 9002
-
-

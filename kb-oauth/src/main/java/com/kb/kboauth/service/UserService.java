@@ -6,6 +6,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
@@ -18,6 +19,7 @@ import java.util.stream.Collectors;
  * @version 1.0
  * @date 2022/6/10 15:42
  */
+@Service
 public class UserService implements UserDetailsService {
     private static List<User> userList;
 
@@ -26,11 +28,11 @@ public class UserService implements UserDetailsService {
 
     @PostConstruct
     public void init() {
-        String password = passwordEncoder.encode("123");
+        String password = passwordEncoder.encode("123456");
         userList = new ArrayList<>(3);
-        userList.add(new User("zglx", password, AuthorityUtils.commaSeparatedStringToAuthorityList("admin")));
-        userList.add(new User("andy", password, AuthorityUtils.commaSeparatedStringToAuthorityList("client")));
-        userList.add(new User("mark", password, AuthorityUtils.commaSeparatedStringToAuthorityList("client")));
+        userList.add(new User("aaa", password, AuthorityUtils.commaSeparatedStringToAuthorityList("admin")));
+        userList.add(new User("bbb", password, AuthorityUtils.commaSeparatedStringToAuthorityList("client")));
+        userList.add(new User("ccc", password, AuthorityUtils.commaSeparatedStringToAuthorityList("client")));
     }
 
     /**
