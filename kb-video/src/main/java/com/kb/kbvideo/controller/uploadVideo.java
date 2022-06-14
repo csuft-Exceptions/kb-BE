@@ -28,10 +28,8 @@ public class uploadVideo {
                 //将文件上传
                 String name = ossClient.uploadVideo(imgFile);
                 //获取文件的URl地址  以便前台  显示
-                String imgUrl = ossClient.getImgUrl(name);
                 //修改视频Vr
 //                Boolean b=hotelService.updatHotelById(hId,imgUrl,hVr);
-                m.put("url", imgUrl);
             } catch (IOException e) {
                 e.printStackTrace();
             }
