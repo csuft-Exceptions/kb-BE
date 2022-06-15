@@ -1,5 +1,4 @@
 ### kb
 初始化kb-gateway
-test
 
-testpr
+util&base todo接口文档
