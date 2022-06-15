@@ -13,7 +13,7 @@ import java.util.regex.Pattern;
  * @version : 1.0
  */
 
-public class PhoneUtils {
+public class PhoneUtil {
     public static  boolean isMobile(String phone){
         Pattern p = null;
         Matcher m = null;

@@ -64,65 +64,65 @@ public class TimeUtil {
     /**
      * 格式化date
      * yy-mm-dd
-     * @param date
-     * @return
-     */
-    public static String formatDate(LocalDate date){
-        return LocalDateTimeUtil.formatNormal(date);
-    }
-
-    /**
-     * 格式化 datetime
-     * @param time
-     * @return
-     */
-    public static String formatDateTime(LocalDateTime time){
-        return LocalDateTimeUtil.formatNormal(time);
-    }
-
-    /**
-     * 是否为周六日
-     * @param date
-     * @return
-     */
-    public static boolean isWeekend(LocalDate date){
-        return LocalDateTimeUtil.isWeekend(date);
-    }
-
-    /**
-     * 是否为周六日
-     * @param time
-     * @return
-     */
-    public static boolean isWeekend(LocalDateTime time){
-        return LocalDateTimeUtil.isWeekend(time);
-    }
-
-    /**
-     * 一天开始的时间
-     * @param time
-     * @return
-     */
-    public static LocalDateTime beginOfDay(LocalDateTime time){
-        return LocalDateTimeUtil.beginOfDay(time);
-    }
-
-    /**
-     * 格式化日期时间为yyyy-MM-dd格式
      * @param localDate
      * @return
      */
-    public static String format(LocalDate localDate){
+    public static String formatDate(LocalDate localDate){
         return LocalDateTimeUtil.formatNormal(localDate);
     }
 
     /**
-     * 格式化日期时间为yyyy-MM-dd HH:mm:ss格式
+     * 格式化 datetime
      * @param localDateTime
      * @return
      */
-    public static String format(LocalDateTime localDateTime){
+    public static String formatDateTime(LocalDateTime localDateTime){
         return LocalDateTimeUtil.formatNormal(localDateTime);
+    }
+
+    /**
+     * 是否为周六日
+     * @param localDate
+     * @return
+     */
+    public static boolean isWeekend(LocalDate localDate){
+        return LocalDateTimeUtil.isWeekend(localDate);
+    }
+
+    /**
+     * 是否为周六日
+     * @param localDateTime
+     * @return
+     */
+    public static boolean isWeekend(LocalDateTime localDateTime){
+        return LocalDateTimeUtil.isWeekend(localDateTime);
+    }
+
+    /**
+     * 一天开始的时间
+     * @param localDateTime
+     * @return
+     */
+    public static LocalDateTime beginOfDay(LocalDateTime localDateTime){
+        return LocalDateTimeUtil.beginOfDay(localDateTime);
+    }
+
+    /**
+     * 解析字符串为yyyy-MM-dd格式的localDate
+     * @param text
+     * @return
+     */
+    public static LocalDate parseDate(String text){
+        return LocalDateTimeUtil.parseDate(text);
+    }
+
+    /**
+     * 格式化日期时间为yyyy-MM-dd HH:mm:ss格式
+     * @param text
+     * @return
+     */
+    public static LocalDateTime parse(String text){
+        return LocalDateTimeUtil.parse(text);
     }
 
     /**
