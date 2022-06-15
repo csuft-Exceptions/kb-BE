@@ -46,7 +46,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <mainClass>com.kb.kboauth.KbOauthApplication</mainClass>
+                    <mainClass>com.kb.oauth.KbOauthApplication</mainClass>
                 </configuration>
                 <executions>
                     <execution>
