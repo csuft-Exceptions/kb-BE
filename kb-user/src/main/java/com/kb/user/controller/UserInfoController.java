@@ -2,6 +2,7 @@ package com.kb.user.controller;
 
 import cn.hutool.system.UserInfo;
 import com.kb.common.base.BaseResponse;
+import com.kb.user.service.api.UserInfoService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -19,7 +20,7 @@ import javax.annotation.Resource;
 public class UserInfoController {
 
     @Resource
-    private  UserInfoService userInfoService;
+    private UserInfoService userInfoService;
 
     @GetMapping("/info")
     public BaseResponse detail(Long id){
@@ -37,7 +38,7 @@ public class UserInfoController {
     }
 
     @DeleteMapping("/info")
-    public BaseResponse delete(UserInfo userInfo){
+    public BaseResponse delete(Long id){
         return userInfoService.delete(userInfo);
     }
 }
