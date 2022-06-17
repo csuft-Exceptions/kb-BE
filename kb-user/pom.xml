@@ -12,6 +12,13 @@
 			<groupId>com.cloud</groupId>
 			<version>0.0.1-SNAPSHOT</version>
 		</parent>
+	<dependencies>
+		<dependency>
+			<groupId>com.kb</groupId>
+			<artifactId>kb-common</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+	</dependencies>
 	<build>
 		<plugins>
 			<plugin>
