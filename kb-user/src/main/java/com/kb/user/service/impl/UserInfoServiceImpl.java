@@ -1,14 +1,16 @@
 package com.kb.user.service.impl;
 
-import cn.hutool.system.UserInfo;
+
 import com.kb.common.base.BaseResponse;
 import com.kb.common.utils.AssertUtil;
 import com.kb.user.dao.UserInfoMapper;
+import com.kb.user.pojo.userInfo.UserInfo;
 import com.kb.user.service.api.UserInfoService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+
 
 /**
  * @author mawz
@@ -53,14 +55,17 @@ public class UserInfoServiceImpl implements UserInfoService {
         return BaseResponse.success("更新成功!");
     }
 
+
     @Override
-    public BaseResponse delete(UserInfo userInfo) {
-        AssertUtil.assertNull(userInfo.getId(),"用户不存在");
-        UserInfo temp=userInfoMapper.detail(userInfo.getId());
+    public BaseResponse delete(Long id) {
+        AssertUtil.assertNull(id,"用户不存在");
+        UserInfo temp=userInfoMapper.detail(id);
         AssertUtil.assertNull(temp,"用户不存在");
 
-        Integer count=userInfoMapper.delete(userInfo);
+        Integer count=userInfoMapper.delete(id);
         AssertUtil.assertNotEquals(1,count,"删除操作失败,请重试!");
         return BaseResponse.success("删除成功!");
+    }
+    private void checkParams(UserInfo userInfo) {
     }
 }

@@ -1,6 +1,6 @@
 package com.kb.user.service.api;
 
-import cn.hutool.system.UserInfo;
+import com.kb.user.pojo.userInfo.UserInfo;
 import com.kb.common.base.BaseResponse;
 
 /**
@@ -33,8 +33,8 @@ public interface UserInfoService {
 
     /**
      * 删除接口
-     * @param userInfo
+     * @param id
      * @return
      */
-    BaseResponse delete(UserInfo userInfo);
+    BaseResponse delete(Long id);
 }

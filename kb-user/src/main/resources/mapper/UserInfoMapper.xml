@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kb.user.dao.UserInfoMapper">
+    <resultMap id="BaseResultMap" type="com.kb.user.pojo.userInfo.UserInfo">
+
+    </resultMap>
+    <sql id="Base_Column_List">
+
+    </sql>
+    <select id="detail" parameterType="java.lang.Long" resultMap="BaseResultMap">
+
+    </select>
+    <insert id="add">
+
+    </insert>
+    <update id="update">
+
+    </update>
+    <update id="delete">
+
+    </update>
+
+</mapper>

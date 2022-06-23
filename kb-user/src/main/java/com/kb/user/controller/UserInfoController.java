@@ -1,6 +1,6 @@
 package com.kb.user.controller;
 
-import cn.hutool.system.UserInfo;
+import com.kb.user.pojo.userInfo.UserInfo;
 import com.kb.common.base.BaseResponse;
 import com.kb.user.service.api.UserInfoService;
 import lombok.extern.slf4j.Slf4j;
@@ -39,6 +39,6 @@ public class UserInfoController {
 
     @DeleteMapping("/info")
     public BaseResponse delete(Long id){
-        return userInfoService.delete(userInfo);
+        return userInfoService.delete(id);
     }
 }
