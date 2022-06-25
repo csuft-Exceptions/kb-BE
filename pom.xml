@@ -14,6 +14,7 @@
         <module>kb-video</module>
         <module>kb-common</module>
         <module>kb-oauth</module>
+        <module>kb-user</module>
     </modules>
     <groupId>com.cloud</groupId>
     <artifactId>kb</artifactId>
@@ -43,7 +44,16 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
         </dependency>
-
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid</artifactId>
+            <version>1.2.5</version>
+        </dependency>
         <!--commons-lang3-->
         <dependency>
             <groupId>org.apache.commons</groupId>
