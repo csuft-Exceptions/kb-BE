@@ -26,12 +26,12 @@ public class UserInfoController {
     }
 
     @PostMapping("/userinfo")
-    public BaseResponse add(UserInfo userInfo){
+    public BaseResponse add(@RequestBody  UserInfo userInfo){
         return userInfoService.add(userInfo);
     }
 
     @PutMapping("/userinfo")
-    public BaseResponse update(UserInfo userInfo){
+    public BaseResponse update(@RequestBody  UserInfo userInfo){
         return userInfoService.update(userInfo);
     }
 
