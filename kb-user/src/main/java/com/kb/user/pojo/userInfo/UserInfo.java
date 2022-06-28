@@ -21,7 +21,7 @@ public class UserInfo {
     /**
      * 用户昵称
      */
-    private String name;
+    private String nickname;
 
     /**
      * 头像url
@@ -78,12 +78,12 @@ public class UserInfo {
         this.userId = userId;
     }
 
-    public String getName() {
-        return name;
+    public String getNickname() {
+        return nickname;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
     }
 
     public String getFace() {

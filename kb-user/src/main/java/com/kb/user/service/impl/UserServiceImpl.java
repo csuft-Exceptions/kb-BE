@@ -2,10 +2,14 @@ package com.kb.user.service.impl;
 
 import com.kb.common.base.BaseResponse;
 import com.kb.common.utils.AssertUtil;
+import com.kb.common.utils.EmailUtil;
+import com.kb.common.utils.PhoneUtil;
 import com.kb.user.dao.UserMapper;
 import com.kb.user.pojo.user.User;
-import com.kb.user.pojo.userInfo.UserInfo;
 import com.kb.user.service.api.UserService;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 
@@ -15,6 +19,8 @@ import javax.annotation.Resource;
  * @description
  * @date 2022/6/28 10:51
  */
+@Service
+@Slf4j
 public class UserServiceImpl implements UserService {
 
     @Resource
@@ -53,5 +59,10 @@ public class UserServiceImpl implements UserService {
     }
 
     private void checkParams(User user) {
+        AssertUtil.assertNotNull(user.getPhone(),"绑定手机不能为空");
+        AssertUtil.isNotTrue(PhoneUtil.isMobile(user.getPhone()),"手机格式不正确");
+        if(StringUtils.isNotBlank(user.getEmail())){
+            AssertUtil.isNotTrue(EmailUtil.isEmail(user.getEmail()),"邮箱格式不正确");
+        }
     }
 }

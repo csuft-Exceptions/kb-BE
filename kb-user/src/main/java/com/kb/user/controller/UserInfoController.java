@@ -4,7 +4,6 @@ import com.kb.user.pojo.userInfo.UserInfo;
 import com.kb.common.base.BaseResponse;
 import com.kb.user.service.api.UserInfoService;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
