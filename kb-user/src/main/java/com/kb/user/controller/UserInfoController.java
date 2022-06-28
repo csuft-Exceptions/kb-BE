@@ -14,29 +14,29 @@ import javax.annotation.Resource;
  * @version 1.0
  * @date 2022-06-16 - 23:30
  */
-@Controller
+@RestController
 @Slf4j
 public class UserInfoController {
 
     @Resource
     private UserInfoService userInfoService;
 
-    @GetMapping("/info")
+    @GetMapping("/userinfo")
     public BaseResponse detail(Long id){
         return userInfoService.detail(id);
     }
 
-    @PostMapping("/info")
+    @PostMapping("/userinfo")
     public BaseResponse add(UserInfo userInfo){
         return userInfoService.add(userInfo);
     }
 
-    @PutMapping("/info")
+    @PutMapping("/userinfo")
     public BaseResponse update(UserInfo userInfo){
         return userInfoService.update(userInfo);
     }
 
-    @DeleteMapping("/info")
+    @DeleteMapping("/userinfo")
     public BaseResponse delete(Long id){
         return userInfoService.delete(id);
     }

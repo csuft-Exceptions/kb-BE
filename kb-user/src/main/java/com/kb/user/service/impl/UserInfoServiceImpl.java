@@ -26,15 +26,12 @@ public class UserInfoServiceImpl implements UserInfoService {
 
     @Override
     public BaseResponse detail(Long id) {
-        userInfoMapper.detail(id);
-        return null;
+        UserInfo userInfo= userInfoMapper.detail(id);
+        return BaseResponse.success(userInfo);
     }
 
     @Override
     public BaseResponse add(UserInfo userInfo) {
-        // todo 有个地方能取到操作人/前端取
-        // log.info("{} 尝试添加一条userInfo",user);
-        // 参数校验
         checkParams(userInfo);
 
         Integer count=userInfoMapper.add(userInfo);
@@ -44,7 +41,6 @@ public class UserInfoServiceImpl implements UserInfoService {
 
     @Override
     public BaseResponse update(UserInfo userInfo) {
-        // todo log
         AssertUtil.assertNull(userInfo.getId(),"用户不存在");
         UserInfo temp=userInfoMapper.detail(userInfo.getId());
         AssertUtil.assertNull(temp,"用户不存在");
