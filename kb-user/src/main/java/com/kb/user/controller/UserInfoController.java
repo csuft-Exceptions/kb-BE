@@ -14,7 +14,6 @@ import javax.annotation.Resource;
  * @version 1.0
  * @date 2022-06-16 - 23:30
  */
-@RequestMapping("/user")
 @Controller
 @Slf4j
 public class UserInfoController {
