@@ -1,15 +1,15 @@
 package com.kb.video.controller;
 
 import com.kb.video.utils.OSSUtil;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+@RestController
 public class uploadVideo {
     /**
      * 上传视频
@@ -40,4 +40,13 @@ public class uploadVideo {
         }
         return m;
     }
+    @RequestMapping("/getUrl/{key}")
+    public String getUrl(@PathVariable("key") String key){
+        OSSUtil ossUtil = new OSSUtil();
+        System.out.println(key);
+        return ossUtil.getUrl(key);
+    }
+
+
+
 }

@@ -25,10 +25,10 @@ public class OSSUtil {
      */
     public static final Logger logger = LoggerFactory.getLogger(OSSUtil.class);
 
-    private String endpoint= null;
-    private String accessKeyId=null;
-    private String accessKeySecret=null;
-    private String bucketName=null;
+    private String endpoint= "oss-cn-hangzhou.aliyuncs.com";
+    private String accessKeyId="LTAI5t7Mihhmt8wXkkstJTN4";
+    private String accessKeySecret="SglFevBI5Gw9fllKP9oBBqL2CFv5yR";
+    private String bucketName="yangkuitest";
     private String FOLDER=null;
 
     /**
@@ -187,15 +187,15 @@ public class OSSUtil {
         // 生成URL
         URL url = ossClient.generatePresignedUrl(bucketName, key, expiration);
         /*        url = "https://" + bucketName + ".oss-cn-beijing.aliyuncs.com/" + bucketName+"/"+ key;*/
-        if (url != null) {
+//        if (url != null) {
+//
+//            String host ="https://"+url.getHost()+url.getPath();
+//
+//            return host;
+//        }
 
-            String host ="https://"+url.getHost()+url.getPath();
 
-            return host;
-        }
-
-
-        return  "";
+        return  url.toString();
     }
 
 
