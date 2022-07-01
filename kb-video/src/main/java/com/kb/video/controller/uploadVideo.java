@@ -38,13 +38,6 @@ public class uploadVideo {
         }
         return m;
     }
-    @RequestMapping("/getUrl/{key}")
-    public String getUrl(@PathVariable("key") String key){
-        OSSUtil ossUtil = new OSSUtil();
-        System.out.println(key);
-        return ossUtil.getUrl(key);
-    }
-
 
 
 }

@@ -1,10 +1,7 @@
 package com.kb.video.utils;
 
 import com.aliyun.oss.*;
-import com.aliyun.oss.model.GetObjectRequest;
-import com.aliyun.oss.model.OSSObject;
-import com.aliyun.oss.model.ObjectMetadata;
-import com.aliyun.oss.model.PutObjectResult;
+import com.aliyun.oss.model.*;
 import net.coobird.thumbnailator.Thumbnails;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,6 +13,7 @@ import java.awt.image.BufferedImage;
 import java.io.*;
 import java.net.URL;
 import java.util.Date;
+import java.util.List;
 import java.util.Random;
 
 public class OSSUtil {
@@ -47,6 +45,8 @@ public class OSSUtil {
             return "Video/"+name;
         } catch (Exception e) {
             throw new IOException("视频上传失败");
+        }finally {
+            ossClient.shutdown();
         }
     }
     /**
@@ -61,16 +61,18 @@ public class OSSUtil {
         Date expiration = new Date(System.currentTimeMillis() + 3600L * 1000 * 24 * 365 * 10);
         // 生成URL
         URL url = ossClient.generatePresignedUrl(bucketName, key, expiration);
-        /*        url = "https://" + bucketName + ".oss-cn-beijing.aliyuncs.com/" + bucketName+"/"+ key;*/
-//        if (url != null) {
-//
-//            String host ="https://"+url.getHost()+url.getPath();
-//
-//            return host;
-//        }
 
+        ossClient.shutdown();
 
         return  url.toString();
+    }
+    public List<OSSObjectSummary> getUrl(){
+        OSS ossClient = new OSSClientBuilder().build(endpoint,accessKeyId,accessKeySecret);
+        //列举文件
+        ObjectListing objectListing = ossClient.listObjects(bucketName);
+        List<OSSObjectSummary> sums = objectListing.getObjectSummaries();
+        ossClient.shutdown();
+        return sums;
     }
     //从OSS下载文件
     public void downloadVideo(String objectName,String pathName){
