@@ -2,6 +2,7 @@ package com.kb.video.controller;
 
 import com.aliyun.oss.model.OSSObjectSummary;
 import com.kb.common.base.BaseResponse;
+import com.kb.common.exception.InfoException;
 import com.kb.video.utils.OSSUtil;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -53,6 +54,10 @@ public class VideoController {
             System.out.println("\t" + s.getKey());
         }
         return BaseResponse.success(collect,collect.size());
+    }
+    @GetMapping("/test")
+    public void testException(){
+        throw new InfoException("test");
     }
 
 
