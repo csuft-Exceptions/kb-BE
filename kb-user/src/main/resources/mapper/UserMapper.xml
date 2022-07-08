@@ -23,6 +23,17 @@
         and
             delete_state=0
     </select>
+    <select id="detailByKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+            <include refid="Base_Column_List"/>
+        from
+            t_user
+        where
+              (  phone= #{key,jdbcType=VARCHAR}
+              or email = #{key,jdbcType=VARCHAR})
+        and
+                delete_state=0
+    </select>
     <insert id="add" parameterType="com.kb.user.pojo.user.User">
         insert into t_user
         <trim prefix="(" suffix=")" suffixOverrides=",">

@@ -21,6 +21,11 @@ public class UserController {
     @Resource
     private UserService userService;
 
+    @GetMapping("/user/{key}")
+    public BaseResponse detailByKey(@PathVariable String key){
+        return userService.detailByKey(key);
+    }
+
     @GetMapping("/user")
     public BaseResponse detail(Long id){
         return userService.detail(id);

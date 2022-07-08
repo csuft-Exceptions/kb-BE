@@ -10,7 +10,7 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
  * @version 1.0
  * @date
  */
-@SpringBootApplication(scanBasePackageClasses ={KbUserApplication.class})
+@SpringBootApplication(scanBasePackages = {"com.kb.*"}, scanBasePackageClasses ={KbUserApplication.class})
 @EnableDiscoveryClient
 @MapperScan("com.kb.user.dao")
 public class KbUserApplication {

@@ -39,4 +39,11 @@ public interface UserMapper {
      * @return
      */
     Integer delete(Long id);
+
+    /**
+     * 根据key获取User
+     * @param key
+     * @return
+     */
+    User detailByKey(String key);
 }

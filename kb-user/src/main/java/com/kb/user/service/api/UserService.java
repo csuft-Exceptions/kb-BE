@@ -39,4 +39,11 @@ public interface UserService {
      * @return
      */
     BaseResponse delete(Long id);
+
+    /**
+     * 根据key（手机号或邮箱获取user）
+     * @param key
+     * @return
+     */
+    BaseResponse detailByKey(String key);
 }

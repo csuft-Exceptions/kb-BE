@@ -1,6 +1,7 @@
 package com.kb.user.service.impl;
 
 import com.kb.common.base.BaseResponse;
+import com.kb.common.exception.AuthException;
 import com.kb.common.utils.AssertUtil;
 import com.kb.common.utils.EmailUtil;
 import com.kb.common.utils.PhoneUtil;
@@ -34,6 +35,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public BaseResponse add(User user) {
+        checkParams(user);
         Integer count=userMapper.add(user);
         checkParams(user);
         AssertUtil.assertNotEqual(1,count,"添加操作失败！");
@@ -59,11 +61,20 @@ public class UserServiceImpl implements UserService {
         return BaseResponse.success("删除成功！");
     }
 
+    @Override
+    public BaseResponse detailByKey(String key) {
+        AssertUtil.assertEmptyStr(key,"获取失败");
+        User user =userMapper.detailByKey(key);
+        AssertUtil.assertNull(user,"用户信息不存在");
+        return BaseResponse.success(user);
+    }
+
     private void checkParams(User user) {
-        AssertUtil.assertNotNull(user.getPhone(),"绑定手机不能为空");
+        AssertUtil.assertNull(user.getPhone(),"绑定手机不能为空");
         AssertUtil.isNotTrue(PhoneUtil.isMobile(user.getPhone()),"手机格式不正确");
         if(StringUtils.isNotBlank(user.getEmail())){
             AssertUtil.isNotTrue(EmailUtil.isEmail(user.getEmail()),"邮箱格式不正确");
         }
     }
+
 }
