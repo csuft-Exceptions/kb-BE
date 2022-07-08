@@ -35,6 +35,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public BaseResponse add(User user) {
         Integer count=userMapper.add(user);
+        checkParams(user);
         AssertUtil.assertNotEqual(1,count,"添加操作失败！");
         return BaseResponse.success("添加成功！");
     }

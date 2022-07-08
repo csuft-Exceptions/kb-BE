@@ -16,7 +16,6 @@ import javax.annotation.Resource;
  */
 @RestController
 @Slf4j
-@RequestMapping("/user")
 public class UserController {
 
     @Resource
@@ -28,12 +27,12 @@ public class UserController {
     }
 
     @PostMapping("/user")
-    public BaseResponse add(User user){
+    public BaseResponse add(@RequestBody  User user){
         return userService.add(user);
     }
 
     @PutMapping("/user")
-    public BaseResponse update(User user){
+    public BaseResponse update(@RequestBody User user){
         return userService.update(user);
     }
 

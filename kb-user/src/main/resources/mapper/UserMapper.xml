@@ -23,7 +23,7 @@
         and
             delete_state=0
     </select>
-    <insert id="add">
+    <insert id="add" parameterType="com.kb.user.pojo.user.User">
         insert into t_user
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="pwd !=null and pwd !=''">
@@ -50,7 +50,7 @@
             now()
         </trim>
     </insert>
-    <update id="update">
+    <update id="update" parameterType="com.kb.user.pojo.user.User">
         update t_user
         <set>
             <if test="pwd !=null and pwd !=''">
@@ -66,7 +66,7 @@
         </set>
         where id = #{id,jdbcType=BIGINT}
     </update>
-    <update id="delete">
+    <update id="delete" parameterType="java.lang.Long">
         update t_user
         <set>
             delete_state=1
