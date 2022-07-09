@@ -22,7 +22,7 @@ public class AssertUtil {
     }
 
     public static void isNotTrue(boolean expression, String msg) {
-        if (expression) {
+        if (!expression) {
             throw new InfoException(msg);
         }
     }

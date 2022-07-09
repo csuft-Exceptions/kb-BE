@@ -1,6 +1,6 @@
 spring:
   application:
-    name: video
+    name: user
   profiles:
     active: dev
   cloud:

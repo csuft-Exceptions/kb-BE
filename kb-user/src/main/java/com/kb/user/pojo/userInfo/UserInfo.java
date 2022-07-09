@@ -1,5 +1,7 @@
 package com.kb.user.pojo.userInfo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.util.Date;
 
 /**
@@ -14,12 +16,12 @@ public class UserInfo {
     /**
      * 用户编号,唯一
      */
-    private String userNo;
+    private Long userId;
 
     /**
      * 用户昵称
      */
-    private String name;
+    private String nickname;
 
     /**
      * 头像url
@@ -41,28 +43,6 @@ public class UserInfo {
     private Integer sex;
 
     /**
-     * 等级level0-6
-     */
-    private Integer rank;
-
-    private Long coins;
-
-    /**
-     * 粉丝数
-     */
-    private Long followers;
-
-    /**
-     * 关注数
-     */
-    private Long followering;
-
-    /**
-     * 动态数
-     */
-    private Integer dynamicCount;
-
-    /**
      * 是否被禁言,0-未被禁言,1-被禁言
      */
     private Integer silence;
@@ -70,18 +50,17 @@ public class UserInfo {
     /**
      * 加入时间
      */
-    private Date joinTime;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+    private Date createTime;
 
-    private String email;
-
-    private String tel;
-
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date updateTime;
 
     /**
      * 是否删除,0-未删除,1-已删除
      */
     private Integer deleteState;
+
 
     public Long getId() {
         return id;
@@ -91,20 +70,20 @@ public class UserInfo {
         this.id = id;
     }
 
-    public String getUserNo() {
-        return userNo;
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setUserNo(String userNo) {
-        this.userNo = userNo;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
-    public String getName() {
-        return name;
+    public String getNickname() {
+        return nickname;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
     }
 
     public String getFace() {
@@ -139,46 +118,6 @@ public class UserInfo {
         this.sex = sex;
     }
 
-    public Integer getRank() {
-        return rank;
-    }
-
-    public void setRank(Integer rank) {
-        this.rank = rank;
-    }
-
-    public Long getCoins() {
-        return coins;
-    }
-
-    public void setCoins(Long coins) {
-        this.coins = coins;
-    }
-
-    public Long getFollowers() {
-        return followers;
-    }
-
-    public void setFollowers(Long followers) {
-        this.followers = followers;
-    }
-
-    public Long getFollowering() {
-        return followering;
-    }
-
-    public void setFollowering(Long followering) {
-        this.followering = followering;
-    }
-
-    public Integer getDynamicCount() {
-        return dynamicCount;
-    }
-
-    public void setDynamicCount(Integer dynamicCount) {
-        this.dynamicCount = dynamicCount;
-    }
-
     public Integer getSilence() {
         return silence;
     }
@@ -187,28 +126,12 @@ public class UserInfo {
         this.silence = silence;
     }
 
-    public Date getJoinTime() {
-        return joinTime;
+    public Date getCreateTime() {
+        return createTime;
     }
 
-    public void setJoinTime(Date joinTime) {
-        this.joinTime = joinTime;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getTel() {
-        return tel;
-    }
-
-    public void setTel(String tel) {
-        this.tel = tel;
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
     }
 
     public Date getUpdateTime() {
