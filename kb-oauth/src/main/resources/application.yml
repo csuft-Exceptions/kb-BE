@@ -2,13 +2,31 @@
 spring:
   application:
     name: kb-oauth
+  main:
+    allow-bean-definition-overriding: true
   redis:
     host: localhost
     password:
     database: 0
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://8.140.48.121:3306/kb_user?useUnicode=true&characterEncoding=utf8&serverTimezone=UTC
+    username: root
+    password: root
   cloud:
     nacos:
       discovery:
         server-addr: 8.140.48.121:8848
+    loadbalancer:
+      ribbon:
+        enabled: false
 server:
   port: 9002
+auth:
+  ttl: 1200 #token存储到Redis的过期时间
+  clientId: kaibai #客户端id
+  clientSecret: kaibai #客户端秘钥
+  cookieDomain: localhost #Cookie保存对应的域名
+  cookieMaxAge: -1 #cookie过期时间，-1表示浏览器关闭则销毁
+
+
