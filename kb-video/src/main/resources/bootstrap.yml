@@ -8,3 +8,4 @@ spring:
       config:
         server-addr: 8.140.48.121:8848
         file-extension: yml
+
