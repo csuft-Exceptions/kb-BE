@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kb.user.dao.UserFollowingMapper">
+    <resultMap id="BaseResultMap" type="com.kb.user.pojo.userFollowing.UserFollowing">
+        <id property="id" column="id" jdbcType="BIGINT"/>
+        <result property="userId" column="user_id" jdbcType="BIGINT"/>
+        <result property="followingId" column="following_id" jdbcType="VARCHAR"/>
+        <result property="groupId" column="group_id" jdbcType="TINYINT"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="deleteState" column="delete_state" jdbcType="TINYINT"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id,user_id,following_id,group_id,create_time,delete_state
+    </sql>
+    <insert id="add">
+        insert into t_user_following
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId!=null">
+                user_id,
+            </if>
+            <if test="followingId!=null">
+                following_id,
+            </if>
+            <if test="groupId!=null">
+                group_id,
+            </if>
+            create_time
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userId!=null">
+                #{userId,jdbcType=BIGINT},
+            </if>
+            <if test="followingId !=null and followingId !=''">
+                #{followingId,jdbcType=VARCHAR},
+            </if>
+            <if test="groupId !=null and groupId !=''">
+                #{groupId,jdbcType=VARCHAR},
+            </if>
+            now()
+        </trim>
+    </insert>
+    <update id="delete">
+        update t_user_following
+        <set>
+            delete_state=1
+        </set>
+        where id= #{id,jdbcType=BIGINT}
+    </update>
+</mapper>
