@@ -3,12 +3,15 @@ package com.kb.video.controller;
 import com.aliyun.oss.model.OSSObjectSummary;
 import com.kb.common.base.BaseResponse;
 import com.kb.common.exception.InfoException;
+import com.kb.video.pojo.VideoInfo;
+import com.kb.video.service.VideoService;
 import com.kb.video.utils.OSSUtil;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.annotation.Resource;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -19,6 +22,9 @@ import java.util.stream.Collectors;
  */
 @RestController
 public class VideoController {
+
+    @Resource
+    VideoService videoService;
 
     @RequestMapping("/getVideo")
     public String downloadVideo(){
@@ -54,6 +60,11 @@ public class VideoController {
             System.out.println("\t" + s.getKey());
         }
         return BaseResponse.success(collect,collect.size());
+    }
+    @GetMapping("/videoinfo")
+    public BaseResponse getAllVideoInfo(){
+        List<VideoInfo> videoInfoList = videoService.getAllVideoInfo();
+        return BaseResponse.success(videoInfoList);
     }
     @GetMapping("/test")
     public void testException(){

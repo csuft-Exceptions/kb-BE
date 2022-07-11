@@ -2,16 +2,20 @@ package com.kb.video.pojo;
 
 import lombok.Data;
 
+import java.util.Date;
+
 @Data
 public class VideoInfo {
-    long id;
+    private long id;
 
-    String name;
+    private String name;
 
-    int type;//分类
+    private int category;//分类
 
-    String url;
+    private String url;
 
-    long picId;//fm
+    private Date expirationTime;
+
+    private Date createTime;
 
 }
