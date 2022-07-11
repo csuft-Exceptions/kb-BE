@@ -52,19 +52,19 @@
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="userId!=null">
-                #{userId,jdbcType=BIGINT}
+                #{userId,jdbcType=BIGINT},
             </if>
             <if test="nickname !=null and nickname !=''">
-                #{nickname,jdbcType=VARCHAR}
+                #{nickname,jdbcType=VARCHAR},
             </if>
             <if test="face !=null and face !=''">
-                #{face,jdbcType=VARCHAR}
+                #{face,jdbcType=VARCHAR},
             </if>
             <if test="birthday !=null and birthday !=''">
-                #{birthday,jdbcType=VARCHAR}
+                #{birthday,jdbcType=VARCHAR},
             </if>
             <if test="sign !=null and sign !=''">
-                #{sign,jdbcType=VARCHAR}
+                #{sign,jdbcType=VARCHAR},
             </if>
             <if test="sex !=null">
                 #{sex,jdbcType=TINYINT},
@@ -91,7 +91,7 @@
                 sex=#{sex,jdbcType=TINYINT},
             </if>
             <if test="silence ！=null">
-                silence=#{silence,jdbcType=TINYINT}
+                silence=#{silence,jdbcType=TINYINT},
             </if>
             update_time = now()
         </set>
