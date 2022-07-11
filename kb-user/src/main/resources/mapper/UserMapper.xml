@@ -60,6 +60,9 @@
             </if>
             now()
         </trim>
+        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
     </insert>
     <update id="update" parameterType="com.kb.user.pojo.user.User">
         update t_user
