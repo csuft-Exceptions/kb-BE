@@ -2,22 +2,106 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.kb.user.dao.UserInfoMapper">
     <resultMap id="BaseResultMap" type="com.kb.user.pojo.userInfo.UserInfo">
-
+        <id property="id" column="id" jdbcType="BIGINT"/>
+        <result property="userId" column="user_id" jdbcType="BIGINT"/>
+        <result property="nickname" column="nickname" jdbcType="VARCHAR"/>
+        <result property="face" column="face" jdbcType="VARCHAR"/>
+        <result property="birthday" column="birthday" jdbcType="VARCHAR"/>
+        <result property="sign" column="sign" jdbcType="VARCHAR"/>
+        <result property="sex" column="sex" jdbcType="TINYINT"/>
+        <result property="silence" column="silence" jdbcType="TINYINT"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+        <result property="deleteState" column="delete_state" jdbcType="TINYINT"/>
     </resultMap>
     <sql id="Base_Column_List">
-
+        id,user_id,nickname,face,birthday,sign,sex,silence,create_time,update_time,delete_state
     </sql>
     <select id="detail" parameterType="java.lang.Long" resultMap="BaseResultMap">
-
+        select
+        <include refid="Base_Column_List"/>
+        from
+        t_user_info
+        where
+        id=#{id,jdbcType=BIGINT}
+        and
+        delete_state=0
     </select>
     <insert id="add">
-
+        insert into t_user_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId!=null">
+                user_id,
+            </if>
+            <if test="nickname !=null and nickname !=''">
+                nickname,
+            </if>
+            <if test="face !=null and face !=''">
+                face,
+            </if>
+            <if test="birthday !=null and birthday !=''">
+                birthday,
+            </if>
+            <if test="sign !=null and sign !=''">
+                sign,
+            </if>
+            <if test="sex !=null">
+                sex,
+            </if>
+            create_time
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userId!=null">
+                #{userId,jdbcType=BIGINT},
+            </if>
+            <if test="nickname !=null and nickname !=''">
+                #{nickname,jdbcType=VARCHAR},
+            </if>
+            <if test="face !=null and face !=''">
+                #{face,jdbcType=VARCHAR},
+            </if>
+            <if test="birthday !=null and birthday !=''">
+                #{birthday,jdbcType=VARCHAR},
+            </if>
+            <if test="sign !=null and sign !=''">
+                #{sign,jdbcType=VARCHAR},
+            </if>
+            <if test="sex !=null">
+                #{sex,jdbcType=TINYINT},
+            </if>
+            now()
+        </trim>
     </insert>
     <update id="update">
-
+        update t_user_info
+        <set>
+            <if test="nickname !=null and nickname !=''">
+                nickname=#{nickname,jdbcType=VARCHAR},
+            </if>
+            <if test="face !=null and face !=''">
+                face=#{face,jdbcType=VARCHAR},
+            </if>
+            <if test="birthday !=null and birthday !=''">
+                birthday=#{birthday,jdbcType=VARCHAR},
+            </if>
+            <if test="sign !=null and sign !=''">
+                sign=#{sign,jdbcType=VARCHAR},
+            </if>
+            <if test="sex !=null">
+                sex=#{sex,jdbcType=TINYINT},
+            </if>
+            <if test="silence ！=null">
+                silence=#{silence,jdbcType=TINYINT},
+            </if>
+            update_time = now()
+        </set>
+        where id = #{id,jdbcType=BIGINT}
     </update>
     <update id="delete">
-
+        update t_user_info
+        <set>
+            delete_state=1
+        </set>
+        where id= #{id,jdbcType=BIGINT}
     </update>
-
 </mapper>

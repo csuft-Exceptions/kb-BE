@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kb.user.dao.UserMapper">
+    <resultMap id="BaseResultMap" type="com.kb.user.pojo.user.User">
+        <id property="id" column="id" jdbcType="BIGINT"/>
+        <result property="pwd" column="pwd" jdbcType="VARCHAR"/>
+        <result property="phone" column="phone" jdbcType="VARCHAR"/>
+        <result property="email" column="email" jdbcType="VARCHAR"/>
+        <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="deleteState" column="delete_state" jdbcType="TINYINT"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id,pwd,phone,email,update_time,create_time,delete_state
+    </sql>
+    <select id="detail" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from
+        t_user
+        where
+            id=#{id,jdbcType=BIGINT}
+        and
+            delete_state=0
+    </select>
+    <select id="detailByKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+            <include refid="Base_Column_List"/>
+        from
+            t_user
+        where
+              (  phone= #{key,jdbcType=VARCHAR}
+              or email = #{key,jdbcType=VARCHAR})
+        and
+                delete_state=0
+    </select>
+    <insert id="add" parameterType="com.kb.user.pojo.user.User">
+        insert into t_user
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="pwd !=null and pwd !=''">
+                pwd,
+            </if>
+            <if test="phone !=null and phone !=''">
+                phone,
+            </if>
+            <if test="email !=null and email !=''">
+                email,
+            </if>
+            create_time
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="pwd !=null and pwd !=''">
+                #{pwd,jdbcType=VARCHAR},
+            </if>
+            <if test="phone !=null and phone !=''">
+                #{phone,jdbcType=VARCHAR},
+            </if>
+            <if test="email !=null and email!='' ">
+                #{email,jdbcType=VARCHAR},
+            </if>
+            now()
+        </trim>
+    </insert>
+    <update id="update" parameterType="com.kb.user.pojo.user.User">
+        update t_user
+        <set>
+            <if test="pwd !=null and pwd !=''">
+                pwd=#{pwd,jdbcType=VARCHAR},
+            </if>
+            <if test="phone !=null and phone !=''">
+                phone=#{phone,jdbcType=VARCHAR},
+            </if>
+            <if test="email !=null and email!='' ">
+                email=#{email,jdbcType=VARCHAR},
+            </if>
+            update_time = now()
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="delete" parameterType="java.lang.Long">
+        update t_user
+        <set>
+            delete_state=1
+        </set>
+        where id= #{id,jdbcType=BIGINT}
+    </update>
+
+</mapper>
