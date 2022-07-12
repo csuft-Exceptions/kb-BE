@@ -6,10 +6,7 @@ import com.kb.common.exception.InfoException;
 import com.kb.video.pojo.VideoInfo;
 import com.kb.video.service.VideoService;
 import com.kb.video.utils.OSSUtil;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -66,9 +63,15 @@ public class VideoController {
         List<VideoInfo> videoInfoList = videoService.getAllVideoInfo();
         return BaseResponse.success(videoInfoList);
     }
-    @GetMapping("/test")
-    public void testException(){
-        throw new InfoException("test");
+    @GetMapping("/videoinfo/{userId}")
+    public BaseResponse getVideoInfoByUserId(@PathVariable("userId") Long userId){
+        List<VideoInfo> videoInfoList = videoService.getVideoInfoByUserId(userId);
+        return BaseResponse.success(videoInfoList);
+    }
+    @GetMapping("/videoinfo/{id}")
+    public BaseResponse getVideoInfoById(@PathVariable("id") Long id){
+        VideoInfo videoInfo = videoService.getVideoInfoById(id);
+        return BaseResponse.success(videoInfo);
     }
 
 

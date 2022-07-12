@@ -8,6 +8,8 @@ import java.util.Date;
 public class VideoInfo {
     private long id;
 
+    private Long userId;
+
     private String name;
 
     private int category;//分类
@@ -17,5 +19,7 @@ public class VideoInfo {
     private Date expirationTime;
 
     private Date createTime;
+
+    private int deleteState;
 
 }

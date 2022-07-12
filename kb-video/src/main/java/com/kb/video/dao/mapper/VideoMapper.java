@@ -1,4 +1,4 @@
-package com.kb.video.mapper;
+package com.kb.video.dao.mapper;
 
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;

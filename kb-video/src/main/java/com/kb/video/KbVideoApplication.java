@@ -8,7 +8,7 @@ import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication(scanBasePackages = {"com.kb.*"}, scanBasePackageClasses ={KbVideoApplication.class})
 @EnableDiscoveryClient
-@MapperScan("com.kb.video.mapper")
+@MapperScan("com.kb.video.dao.mapper")
 public class KbVideoApplication {
 
     public static void main(String[] args) {
