@@ -13,6 +13,7 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * @author wjx
@@ -25,15 +26,18 @@ public class AuthController {
 
     @Resource
     private AuthService authService;
-
-
     @PostMapping("/login")
-    public BaseResponse loginByOther(@RequestBody RegisterParam loginParamByPass){
-
-
-        //log.info("cookie:",new AuthServiceImpl().getTokenFormCookie());
-
+    public BaseResponse loginByPwd(@RequestBody RegisterParam loginParamByPass){
+        log.info("username:",loginParamByPass.getUsername());
+        log.info("password:",loginParamByPass.getPassword());
         BaseResponse response = authService.loginByPass(loginParamByPass);
+        return response;
+    }
+
+
+    @PostMapping("/logout")
+    public BaseResponse logout(HttpServletRequest request){
+        BaseResponse response = authService.logout(request);
         return response;
     }
 }

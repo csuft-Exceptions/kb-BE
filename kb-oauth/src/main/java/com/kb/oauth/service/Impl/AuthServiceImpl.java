@@ -4,14 +4,14 @@ import com.alibaba.fastjson.JSON;
 import com.kb.common.base.BaseResponse;
 import com.kb.common.utils.AssertUtil;
 import com.kb.common.utils.Base64Util;
+import com.kb.oauth.common.CookieToken;
+import com.kb.oauth.common.RedisToken;
 import com.kb.oauth.service.api.AuthService;
 import com.kb.oauth.util.AuthToken;
-import com.kb.oauth.util.CookieUtil;
 import com.kb.oauth.vo.params.RegisterParam;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.http.*;
 import org.springframework.http.client.ClientHttpResponse;
 import org.springframework.stereotype.Service;
@@ -21,8 +21,8 @@ import org.springframework.web.client.DefaultResponseErrorHandler;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
-import org.springframework.web.util.UriComponentsBuilder;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -41,9 +41,11 @@ import java.util.concurrent.TimeUnit;
 public class AuthServiceImpl implements AuthService {
 
     @Autowired
+    private RedisToken redisToken;
+    @Resource
     private RestTemplate restTemplate;
     @Autowired
-    private RedisTemplate redisTemplate;
+    private CookieToken cookieToken;
     @Value("${auth.clientId}")
     private String clientId;
     @Value("${auth.clientSecret}")
@@ -67,81 +69,28 @@ public class AuthServiceImpl implements AuthService {
         String accessToken = authToken.getAccessToken();
         //存储到Redis中的内容
         String jsonData = JSON.toJSONString(authToken);
-        boolean result = this.saveTokenToRedis(accessToken,jsonData,ttl);
-        this.saveCookie(accessToken);
+        boolean result = redisToken.saveTokenToRedis(accessToken,jsonData,ttl);
+        //获取与当前请求相关的response
+        HttpServletResponse response = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getResponse();
+        //设置cookie
+        cookieToken.saveCookie(response,accessToken,cookieDomain,cookieMaxAge);
         if (!result){
             //todo
         }
         return BaseResponse.success(accessToken);
     }
-    /**
-     * 将token存入Redis
-     * @param accessToken 用户身份令牌
-     * @param value 内容 authToken
-     * @param ttl 过期时间
-     * @return
-     */
-    private boolean saveTokenToRedis(String accessToken, String value, long ttl) {
-        String key = "user_key:"+accessToken;
-        redisTemplate.opsForValue().set(key,value,ttl, TimeUnit.SECONDS);
-        Long expire = redisTemplate.getExpire(key, TimeUnit.SECONDS);
-        return expire>0;
-    }
 
-    /**
-     * 从Redis中删除token
-     * @param token
-     */
-    private void delToken(String token){
-        String key = "user_key"+token;
-        redisTemplate.delete(key);
-    }
-
-    /**
-     * 从Redis取出数据
-     * @param token
-     * @return
-     */
-    private AuthToken getToken(String token){
-        String key = "user_key" + token;
-        String value = (String) redisTemplate.opsForValue().get(key);
-        AuthToken authToken = JSON.parseObject(value, AuthToken.class);
-        return authToken;
-    }
-
-    /**
-     * 将令牌存储到cookie
-     * @param token
-     */
-    private void saveCookie(String token){
-        //获取该次请求相关的response，RequestContextHolder（通过ThreadLocal拿到当前请求信息）
+    @Override
+    public BaseResponse logout(HttpServletRequest request) {
+        //获取cookie中的身份令牌
+        String accessToken = cookieToken.getTokenFormCookie(request);
+        //删除Redis token
+        boolean result = redisToken.delToken(accessToken);
         HttpServletResponse response = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getResponse();
-        //HttpServletResponse response,String domain,String path, String name, String value, int maxAge,boolean httpOnly
-        CookieUtil.addCookie(response,cookieDomain,"/","uid",token,cookieMaxAge,false);
-
-    }
-    /**
-     * 从cookie删除token
-     */
-    private void clearCookie(String token){
-        HttpServletResponse response = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getResponse();
-        CookieUtil.addCookie(response,cookieDomain,"/","uid",token,0,false);
-
-    }
-    /**
-     * 取出cookie中的身份令牌
-     * @return
-     */
-    private String getTokenFormCookie(){
-        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
-        Map<String, String> map = CookieUtil.readCookie(request, "uid");
-        if(map!=null && map.get("uid")!=null){
-            String uid = map.get("uid");
-            return uid;
-        }
+        //清除cookie
+        cookieToken.clearCookie(response,accessToken,cookieDomain);
         return null;
     }
-
 
     /**
      * 申请令牌
