@@ -16,6 +16,7 @@ import org.springframework.security.oauth2.config.annotation.web.configurers.Aut
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
 import org.springframework.security.oauth2.provider.ClientDetailsService;
 import org.springframework.security.oauth2.provider.client.JdbcClientDetailsService;
+import org.springframework.security.oauth2.provider.token.DefaultAccessTokenConverter;
 import org.springframework.security.oauth2.provider.token.TokenEnhancer;
 import org.springframework.security.oauth2.provider.token.TokenEnhancerChain;
 import org.springframework.security.oauth2.provider.token.TokenStore;
@@ -72,7 +73,6 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 
     /**
      * 使用密码模式需要配置
-     *
      * @param endpoints
      * @throws Exception
      */
@@ -84,7 +84,6 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
         delegates.add(jwtTokenEnhancer);
         delegates.add(jwtAccessTokenConverter);
         tokenEnhancerChain.setTokenEnhancers(delegates);
-
         endpoints.authenticationManager(authenticationManager)
                 .userDetailsService(userDetailsService)
                 // 配置令牌存储策略
@@ -128,6 +127,15 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
                 .passwordEncoder(new BCryptPasswordEncoder())
                 .tokenKeyAccess("permitAll()")
                 .checkTokenAccess("isAuthenticated()");
+    }
+
+    @Bean
+    public JwtAccessTokenConverter jwtAccessTokenConverter(CustomUserAuthenticationConverter customUserAuthenticationConverter){
+        JwtAccessTokenConverter converter = new JwtAccessTokenConverter();
+        //配置自定义的CustomUserAuthenticationConverter
+        DefaultAccessTokenConverter accessTokenConverter = (DefaultAccessTokenConverter) converter.getAccessTokenConverter();
+        accessTokenConverter.setUserTokenConverter(customUserAuthenticationConverter);
+        return converter;
     }
 
 }

@@ -1,5 +1,6 @@
 package com.kb.oauth.dao;
 
+import com.alibaba.fastjson.JSONObject;
 import com.kb.common.base.BaseResponse;
 import com.kb.oauth.pojo.UserInfo;
 import org.springframework.cloud.openfeign.FeignClient;
@@ -14,5 +15,5 @@ import org.springframework.web.bind.annotation.RequestBody;
 public interface UserInfoFeign {
 
     @PostMapping("/userinfo")
-    public BaseResponse add(@RequestBody UserInfo userInfo);
+    public BaseResponse add(@RequestBody JSONObject jsonObject);
 }

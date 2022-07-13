@@ -1,5 +1,6 @@
 package com.kb.oauth.service.Impl;
 
+import com.alibaba.fastjson.JSON;
 import com.kb.common.base.BaseResponse;
 import com.kb.oauth.dao.UserFeign;
 import com.kb.oauth.util.UserJwt;
@@ -53,14 +54,17 @@ public class UserDetailServiceImpl implements UserDetailsService {
             return null;
         }
         BaseResponse response = userFeign.detailByKey(username);
+        //todo
+        //若表中数据不存在即response为fail的处理
         Object data = response.getData();
-        com.kb.oauth.pojo.User user = (com.kb.oauth.pojo.User)data;
-        //返回空 ：security该用户不存在
+        String jsonString = JSON.toJSONString(data);
+        com.kb.oauth.pojo.User user = JSON.parseObject(jsonString, com.kb.oauth.pojo.User.class);
+        //返回空 通知security该用户不存在
         if (user == null){
             return null;
         }
         String password = user.getPwd();
-        String permission = "*";
+        String permission = "all";
         UserJwt userDetail = new UserJwt(username,password,AuthorityUtils.commaSeparatedStringToAuthorityList(permission));
         return userDetail;
     }

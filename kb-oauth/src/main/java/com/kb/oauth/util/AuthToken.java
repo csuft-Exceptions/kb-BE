@@ -10,10 +10,10 @@ import java.io.Serializable;
  */
 @Data
 public class AuthToken implements Serializable {
-    /**令牌信息 jwt*/
+    /**身份令牌信息*/
     private String accessToken;
     /**刷新token*/
     private String refreshToken;
     /**jwt短令牌*/
-    private String jti;
+    private String jwtToken;
 }
