@@ -30,7 +30,7 @@ public class JwtTokenStoreConfig {
     public JwtAccessTokenConverter jwtAccessTokenConverter() {
         JwtAccessTokenConverter jwtAccessTokenConverter = new JwtAccessTokenConverter();
         // 配置jwt使用的密钥
-        jwtAccessTokenConverter.setSigningKey("test_key");
+        jwtAccessTokenConverter.setSigningKey("KaiBai_key");
         return jwtAccessTokenConverter;
     }
 }
