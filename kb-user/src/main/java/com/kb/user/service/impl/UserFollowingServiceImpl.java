@@ -1,13 +1,17 @@
 package com.kb.user.service.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.kb.common.base.BaseResponse;
 import com.kb.common.utils.AssertUtil;
 import com.kb.user.dao.UserFollowingMapper;
 import com.kb.user.pojo.userFollowing.UserFollowing;
+import com.kb.user.pojo.userFollowing.UserFollowingParam;
 import com.kb.user.service.api.UserFollowingService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * @author mawz
@@ -33,5 +37,12 @@ public class UserFollowingServiceImpl implements UserFollowingService {
         Integer count=userFollowingMapper.delete(id);
         AssertUtil.assertNotEquals(1,count,"取关操作失败,请刷新重试!");
         return BaseResponse.success("取关成功!");
+    }
+
+    @Override
+    public BaseResponse list(UserFollowingParam userFollowingParam) {
+        List<UserFollowingParam> list=userFollowingMapper.list(userFollowingParam);
+        PageInfo
+        return null;
     }
 }

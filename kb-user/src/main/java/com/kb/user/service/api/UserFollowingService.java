@@ -2,6 +2,7 @@ package com.kb.user.service.api;
 
 import com.kb.common.base.BaseResponse;
 import com.kb.user.pojo.userFollowing.UserFollowing;
+import com.kb.user.pojo.userFollowing.UserFollowingParam;
 
 /**
  * @author mawz
@@ -23,4 +24,11 @@ public interface UserFollowingService {
      * @return
      */
     BaseResponse delete(Long id);
+
+    /**
+     * 根据userId和groupId查询
+     * @param userFollowingParam
+     * @return
+     */
+    BaseResponse list(UserFollowingParam userFollowingParam);
 }
