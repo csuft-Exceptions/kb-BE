@@ -1,7 +1,10 @@
 package com.kb.user.dao;
 
 import com.kb.user.pojo.userFollowing.UserFollowing;
+import com.kb.user.pojo.userFollowing.UserFollowingParam;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 /**
  * @author mawz
@@ -25,4 +28,8 @@ public interface UserFollowingMapper {
      * @return
      */
     Integer delete(Long id);
+
+    List<UserFollowing> list(UserFollowingParam userFollowingParam);
+
+    List<UserFollowing> fans(Long followingId);
 }

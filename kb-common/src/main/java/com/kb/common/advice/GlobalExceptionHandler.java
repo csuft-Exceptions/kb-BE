@@ -4,12 +4,7 @@ import com.kb.common.base.BaseResponse;
 import com.kb.common.exception.AuthException;
 import com.kb.common.exception.InfoException;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.core.Ordered;
-import org.springframework.core.annotation.Order;
-import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import javax.servlet.http.HttpServletRequest;
@@ -35,7 +30,12 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(Exception.class)
-    public BaseResponse handlerInfoException(Exception e, HttpServletRequest request){
+    public BaseResponse handlerException(Exception e, HttpServletRequest request){
+        if(e instanceof InfoException){
+            return handlerInfoException((InfoException) e,request);
+        }else if(e instanceof  AuthException){
+            return handlerAuthException((AuthException) e,request);
+        }
         log.error(">>>>>>>>>>>Exception Catch,request URL:{}>>>>>>>>>>>",request.getRequestURL(),e);
         return BaseResponse.failed("系统出错！请稍后再试！");
     }

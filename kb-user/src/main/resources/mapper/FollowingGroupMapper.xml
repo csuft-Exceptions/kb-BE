@@ -66,7 +66,7 @@
         <set>
             <if test="groupName !=null and groupName !=''">
                 group_name=#{groupName,jdbcType=VARCHAR},
-            </if>,
+            </if>
             update_time = now()
         </set>
         where id = #{id,jdbcType=BIGINT}

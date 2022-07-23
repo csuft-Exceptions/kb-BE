@@ -26,9 +26,16 @@ public interface UserFollowingService {
     BaseResponse delete(Long id);
 
     /**
-     * 根据userId和groupId查询
+     * 根据userId和groupId查询关注列表
      * @param userFollowingParam
      * @return
      */
     BaseResponse list(UserFollowingParam userFollowingParam);
+
+    /**
+     * 根据followingId字段查询粉丝列表
+     * @param followingId
+     * @return
+     */
+    BaseResponse fans(Long followingId);
 }

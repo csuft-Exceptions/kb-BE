@@ -40,4 +40,9 @@ public class UserFollowingController {
         return userFollowingService.list(userFollowingParam);
     }
 
+    @GetMapping("following-fans")
+    public BaseResponse fans(Long followingId){
+        return userFollowingService.fans(followingId);
+    }
+
 }
