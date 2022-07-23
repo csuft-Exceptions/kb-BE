@@ -1,28 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.kb.user.dao.UserFollowingMapper">
-    <resultMap id="BaseResultMap" type="com.kb.user.pojo.userFollowing.UserFollowing">
+<mapper namespace="com.kb.user.dao.UserCollectionMapper">
+    <resultMap id="BaseResultMap" type="com.kb.user.pojo.userCollection.UserCollection">
         <id property="id" column="id" jdbcType="BIGINT"/>
         <result property="userId" column="user_id" jdbcType="BIGINT"/>
-        <result property="followingId" column="following_id" jdbcType="VARCHAR"/>
-        <result property="groupId" column="group_id" jdbcType="TINYINT"/>
+        <result property="contentId" column="content_id" jdbcType="VARCHAR"/>
+        <result property="collectionId" column="collection_id" jdbcType="TINYINT"/>
         <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
         <result property="deleteState" column="delete_state" jdbcType="TINYINT"/>
     </resultMap>
     <sql id="Base_Column_List">
-        id,user_id,following_id,group_id,create_time,delete_state
+        id,user_id,content_id,collection_id,create_time,delete_state
     </sql>
     <insert id="add">
-        insert into t_user_following
+        insert into t_user_collection
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="userId!=null">
                 user_id,
             </if>
-            <if test="followingId!=null">
-                following_id,
+            <if test="contentId!=null">
+                content_id,
             </if>
-            <if test="groupId!=null">
-                group_id,
+            <if test="collectionId!=null">
+                collection_id,
             </if>
             create_time
         </trim>
@@ -30,41 +30,31 @@
             <if test="userId!=null">
                 #{userId,jdbcType=BIGINT},
             </if>
-            <if test="followingId !=null">
-                #{followingId,jdbcType=BIGINT},
+            <if test="contentId !=null">
+                #{contentId,jdbcType=BIGINT},
             </if>
-            <if test="groupId !=null">
-                #{groupId,jdbcType=BIGINT},
+            <if test="collectionId !=null">
+                #{collectionId,jdbcType=BIGINT},
             </if>
             now()
         </trim>
     </insert>
     <update id="delete">
-        update t_user_following
+        update t_user_collection
         <set>
             delete_state=1
         </set>
         where id= #{id,jdbcType=BIGINT}
     </update>
-    <select id="fans" parameterType="java.lang.Long" resultMap="BaseResultMap">
-        select
-        <include refid="Base_Column_List"/>
-        from
-        t_user_following
-        where
-        following_id=#{followingId}
-        and
-        delete_state=0
-    </select>
-    <select id="list" parameterType="com.kb.user.pojo.userFollowing.UserFollowingParam" resultMap="BaseResultMap">
+    <select id="list" parameterType="com.kb.user.pojo.userCollection.UserCollectionParam" resultMap="BaseResultMap">
         select
             <include refid="Base_Column_List"/>
         from
-            t_user_following
+            t_user_collection
         where
             user_id=#{userId,jdbcType=BIGINT}
         and
-            group_id=#{groupId,jdbcType=BIGINT}
+            collection_id=#{collectionId,jdbcType=BIGINT}
         and
             delete_state=0
         order by
