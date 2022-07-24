@@ -12,6 +12,7 @@ import javax.annotation.Resource;
  * @version 1.0
  * @date 2022-07-23 - 16:38
  */
+@RestController
 public class CollectionsController {
     @Resource
     private CollectionsService collectionsService;

@@ -14,6 +14,7 @@
         <module>kb-video</module>
         <module>kb-common</module>
         <module>kb-oauth</module>
+        <module>kb-job</module>
         <module>kb-user</module>
     </modules>
     <groupId>com.cloud</groupId>

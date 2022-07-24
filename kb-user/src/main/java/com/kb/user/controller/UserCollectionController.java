@@ -4,10 +4,7 @@ import com.kb.common.base.BaseResponse;
 import com.kb.user.pojo.userCollection.UserCollection;
 import com.kb.user.pojo.userCollection.UserCollectionParam;
 import com.kb.user.service.api.UserCollectionService;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 
@@ -16,6 +13,7 @@ import javax.annotation.Resource;
  * @version 1.0
  * @date 2022-07-23 - 16:24
  */
+@RestController
 public class UserCollectionController {
     @Resource
     private UserCollectionService userCollectionService;
