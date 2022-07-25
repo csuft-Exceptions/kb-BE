@@ -1,7 +1,6 @@
 package com.kb.user.service.impl;
 
 import com.kb.common.base.BaseResponse;
-import com.kb.common.exception.AuthException;
 import com.kb.common.utils.AssertUtil;
 import com.kb.common.utils.EmailUtil;
 import com.kb.common.utils.PhoneUtil;
@@ -39,7 +38,7 @@ public class UserServiceImpl implements UserService {
         Integer count=userMapper.add(user);
         checkParams(user);
         AssertUtil.assertNotEqual(1,count,"添加操作失败！");
-        return BaseResponse.success("添加成功！");
+        return BaseResponse.success(user.getId());
     }
 
     @Override
