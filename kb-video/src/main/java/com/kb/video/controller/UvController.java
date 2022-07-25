@@ -13,7 +13,7 @@ import javax.annotation.Resource;
  * @date 2022-07-24 - 18:01
  */
 @RestController
-public class uvController {
+public class UvController {
 
     @Resource
     private RedisTemplate<String, String> redisTemplate;

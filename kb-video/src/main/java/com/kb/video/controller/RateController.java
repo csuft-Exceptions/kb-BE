@@ -16,7 +16,7 @@ import java.util.concurrent.TimeUnit;
  * @version 1.0
  * @date 2022-07-24 - 18:17
  */
-public class rateController {
+public class RateController {
 
     @Resource
     private RedisTemplate<String, String> redisTemplate;

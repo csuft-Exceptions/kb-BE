@@ -2,6 +2,7 @@ package com.kb.video.service;
 
 import com.kb.video.pojo.BarrageInfo;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
@@ -9,6 +10,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+
+@Service
 public class BarrageService {
 
     @Resource
