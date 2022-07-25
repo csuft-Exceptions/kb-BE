@@ -1,10 +1,12 @@
 package com.kb.video.pojo;
 
+import io.swagger.annotations.ApiModel;
 import lombok.Data;
 
 import java.util.Date;
 
 @Data
+@ApiModel
 public class VideoInfo {
     private Long id;
 
@@ -28,6 +30,6 @@ public class VideoInfo {
 
     private long barrages;
 
-    private long barragesId;
+    private long barrageId;
 
 }

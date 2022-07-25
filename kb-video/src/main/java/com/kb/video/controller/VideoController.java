@@ -6,6 +6,8 @@ import com.kb.common.exception.InfoException;
 import com.kb.video.pojo.VideoInfo;
 import com.kb.video.service.VideoService;
 import com.kb.video.utils.OSSUtil;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -18,6 +20,7 @@ import java.util.stream.Collectors;
  * @date 2022/6/12 8:21
  */
 @RestController
+@Api("video")
 public class VideoController {
 
     @Resource
@@ -37,6 +40,7 @@ public class VideoController {
      * @param key
      * @return
      */
+    @ApiOperation("获取指定key的url")
     @GetMapping ("/url/{key}")
     public BaseResponse getUrl(@PathVariable("key") String key){
         OSSUtil ossUtil = new OSSUtil();
@@ -58,16 +62,36 @@ public class VideoController {
         }
         return BaseResponse.success(collect,collect.size());
     }
+
+    /**
+     * 查询所有视频信息
+     * @return
+     */
+    @ApiOperation("查询所有视频信息")
     @GetMapping("/videoinfo")
     public BaseResponse getAllVideoInfo(){
         List<VideoInfo> videoInfoList = videoService.getAllVideoInfo();
         return BaseResponse.success(videoInfoList);
     }
+
+    /**
+     * 查询用户的所有视频
+     * @param userId
+     * @return
+     */
+    @ApiOperation("查询用户的所有视频")
     @GetMapping("/videoinfo/{userId}")
     public BaseResponse getVideoInfoByUserId(@PathVariable("userId") Long userId){
         List<VideoInfo> videoInfoList = videoService.getVideoInfoByUserId(userId);
         return BaseResponse.success(videoInfoList);
     }
+
+    /**
+     * 根据id查询视频
+     * @param id
+     * @return
+     */
+    @ApiOperation("根据id查询视频")
     @GetMapping("/videoinfo/{id}")
     public BaseResponse getVideoInfoById(@PathVariable("id") Long id){
         VideoInfo videoInfo = videoService.getVideoInfoById(id);
