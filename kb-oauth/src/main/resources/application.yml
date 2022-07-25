@@ -30,6 +30,12 @@ auth:
   clientSecret: kaibai #客户端秘钥
   cookieDomain: 192.168.43.75 #Cookie保存对应的域名
   cookieMaxAge: -1 #cookie过期时间，-1表示浏览器关闭则销毁
+#从GitHub获取的信息
+github:
+  auth:
+    clientId: 1530106af0a44b467aec
+    clientSecret: 1b3d76ae9226c19aebb2e02e25537da587d6d98e
+    callback: http://localhost:9002/oauth/callback
 ribbon:
   ReadTimeout: 5000
   ConnectionTimeout: 5000
