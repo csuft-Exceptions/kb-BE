@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kb.user.dao.CollectionsMapper">
+    <resultMap id="BaseResultMap" type="com.kb.user.pojo.collections.Collections">
+        <id property="id" column="id" jdbcType="BIGINT"/>
+        <result property="userId" column="user_id" jdbcType="BIGINT"/>
+        <result property="collectionName" column="collection_name" jdbcType="VARCHAR"/>
+        <result property="type" column="type" jdbcType="TINYINT"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+        <result property="deleteState" column="delete_state" jdbcType="TINYINT"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id,user_id,collection_name,type,create_time,update_time,delete_state
+    </sql>
+    <select id="detail" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+            <include refid="Base_Column_List"/>
+        from
+        t_collections
+        where
+            id=#{id,jdbcType=BIGINT}
+        and
+            delete_state=0
+    </select>
+    <select id="list" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+            <include refid="Base_Column_List"/>
+        from
+        t_collections
+        where
+            (user_id=#{userId}
+        or
+            type = 0)
+        and
+            delete_state=0
+        order by
+            id
+        desc
+    </select>
+    <insert id="add">
+        insert into t_collections
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId!=null">
+                user_id,
+            </if>
+            <if test="collectionName !=null and collectionName !=''">
+                collection_name,
+            </if>
+            type,
+            create_time
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userId!=null">
+                #{userId,jdbcType=BIGINT},
+            </if>
+            <if test="groupName !=null and groupName !=''">
+                #{groupName,jdbcType=VARCHAR},
+            </if>
+            1,
+            now()
+        </trim>
+    </insert>
+    <update id="update">
+        update t_collections
+        <set>
+            <if test="collectionName !=null and collectionName !=''">
+                collection_name=#{collectionName,jdbcType=VARCHAR},
+            </if>
+            update_time = now()
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="delete">
+        update t_collections
+        <set>
+            delete_state=1
+        </set>
+        where id= #{id,jdbcType=BIGINT}
+    </update>
+</mapper>

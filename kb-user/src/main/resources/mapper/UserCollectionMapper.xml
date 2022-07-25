@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kb.user.dao.UserCollectionMapper">
+    <resultMap id="BaseResultMap" type="com.kb.user.pojo.userCollection.UserCollection">
+        <id property="id" column="id" jdbcType="BIGINT"/>
+        <result property="userId" column="user_id" jdbcType="BIGINT"/>
+        <result property="contentId" column="content_id" jdbcType="VARCHAR"/>
+        <result property="collectionId" column="collection_id" jdbcType="TINYINT"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="deleteState" column="delete_state" jdbcType="TINYINT"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id,user_id,content_id,collection_id,create_time,delete_state
+    </sql>
+    <insert id="add">
+        insert into t_user_collection
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId!=null">
+                user_id,
+            </if>
+            <if test="contentId!=null">
+                content_id,
+            </if>
+            <if test="collectionId!=null">
+                collection_id,
+            </if>
+            create_time
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userId!=null">
+                #{userId,jdbcType=BIGINT},
+            </if>
+            <if test="contentId !=null">
+                #{contentId,jdbcType=BIGINT},
+            </if>
+            <if test="collectionId !=null">
+                #{collectionId,jdbcType=BIGINT},
+            </if>
+            now()
+        </trim>
+    </insert>
+    <update id="delete">
+        update t_user_collection
+        <set>
+            delete_state=1
+        </set>
+        where id= #{id,jdbcType=BIGINT}
+    </update>
+    <select id="list" parameterType="com.kb.user.pojo.userCollection.UserCollectionParam" resultMap="BaseResultMap">
+        select
+            <include refid="Base_Column_List"/>
+        from
+            t_user_collection
+        where
+            user_id=#{userId,jdbcType=BIGINT}
+        and
+            collection_id=#{collectionId,jdbcType=BIGINT}
+        and
+            delete_state=0
+        order by
+            id
+        desc
+    </select>
+</mapper>

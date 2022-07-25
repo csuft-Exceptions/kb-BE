@@ -90,7 +90,7 @@
             <if test="sex !=null">
                 sex=#{sex,jdbcType=TINYINT},
             </if>
-            <if test="silence ！=null">
+            <if test="silence !=null">
                 silence=#{silence,jdbcType=TINYINT},
             </if>
             update_time = now()
