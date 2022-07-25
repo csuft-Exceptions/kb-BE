@@ -6,13 +6,13 @@ import java.util.Date;
 
 @Data
 public class VideoInfo {
-    private long id;
+    private Long id;
 
     private Long userId;
 
     private String name;
 
-    private int category;//分类
+    private Integer category;//分类
 
     private String url;
 
@@ -21,5 +21,13 @@ public class VideoInfo {
     private Date createTime;
 
     private int deleteState;
+
+    private long likes;
+
+    private long plays;
+
+    private long barrages;
+
+    private long barragesId;
 
 }

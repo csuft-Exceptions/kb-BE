@@ -2,6 +2,7 @@ package com.kb.video.controller;
 
 import com.kb.common.base.BaseResponse;
 import com.kb.video.pojo.VideoInfo;
+import com.kb.video.service.VideoService;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,16 +21,19 @@ public class rateController {
     @Resource
     private RedisTemplate<String, String> redisTemplate;
 
+    @Resource
+    private VideoService videoService;
+
     /**
      * 视频信息落库前做的处理
-     * @param video
+     * @param videoInfo
      * @return
      */
     @GetMapping("/pre")
     public BaseResponse preHandler(@RequestBody VideoInfo videoInfo){
-        redisTemplate.opsForSet().add("top",videoInfo.getId());
+        redisTemplate.opsForSet().add("top",videoInfo.getId().toString());
         // 过期时间为3天 实际为71小时
-        redisTemplate.opsForValue().set(videoInfo.getId(), videoInfo.getCategory().toString(),255600, TimeUnit.SECONDS);
+        redisTemplate.opsForValue().set(videoInfo.getId().toString(), videoInfo.getCategory().toString(),255600, TimeUnit.SECONDS);
         return null;
     }
 
@@ -45,14 +49,14 @@ public class rateController {
             return null;
         }
         for(String s:set){
-            Video video=getVideo(Long.valueOf(s));
+            VideoInfo videoInfo=videoService.getVideoInfoById(Long.valueOf(s));
             redisTemplate.opsForZSet().remove("topZSet",s);
             //分类
-            redisTemplate.opsForZSet().remove("topZSet"+video.getCategory(),s);
+            redisTemplate.opsForZSet().remove("topZSet"+videoInfo.getCategory(),s);
             if(redisTemplate.hasKey(s)){
-                double score=getScore(video);
+                double score=videoService.getVideoInfoById(videoInfo.getId()).getPlays();
                 redisTemplate.opsForZSet().add("topZSet",s, score);
-                redisTemplate.opsForZSet().add("topZSet"+video.getCategory(), s,score);
+                redisTemplate.opsForZSet().add("topZSet"+videoInfo.getCategory(), s,score);
             }else{
                 redisTemplate.opsForSet().remove("top",s);
             }
