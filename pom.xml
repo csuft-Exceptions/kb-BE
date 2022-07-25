@@ -14,6 +14,7 @@
         <module>kb-video</module>
         <module>kb-common</module>
         <module>kb-oauth</module>
+        <module>kb-job</module>
         <module>kb-user</module>
     </modules>
     <groupId>com.cloud</groupId>
@@ -103,6 +104,12 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/com.github.pagehelper/pagehelper-spring-boot-starter -->
+        <dependency>
+            <groupId>com.github.pagehelper</groupId>
+            <artifactId>pagehelper-spring-boot-starter</artifactId>
+            <version>1.3.0</version>
         </dependency>
         <!--nacos discovery-->
         <dependency>

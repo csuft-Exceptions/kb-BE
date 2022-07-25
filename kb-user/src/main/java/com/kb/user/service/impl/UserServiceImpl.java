@@ -1,7 +1,6 @@
 package com.kb.user.service.impl;
 
 import com.kb.common.base.BaseResponse;
-import com.kb.common.exception.AuthException;
 import com.kb.common.utils.AssertUtil;
 import com.kb.common.utils.EmailUtil;
 import com.kb.common.utils.PhoneUtil;

@@ -27,6 +27,7 @@ public class UserInfoServiceImpl implements UserInfoService {
     @Override
     public BaseResponse detail(Long id) {
         UserInfo userInfo= userInfoMapper.detail(id);
+        AssertUtil.assertNull(userInfo,"用户不存在!");
         return BaseResponse.success(userInfo);
     }
 
