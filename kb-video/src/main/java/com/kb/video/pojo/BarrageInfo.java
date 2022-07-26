@@ -11,7 +11,7 @@ import java.util.Date;
 @ApiModel
 public class BarrageInfo {
 
-    @TableId(value = "id", type = IdType.INPUT)
+    @TableId(value = "id", type = IdType.AUTO)
     private Long id;
 
     private int offsetTime;//偏移量（相对于0）  视频播放时间
