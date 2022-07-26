@@ -2,10 +2,7 @@ package com.kb.video.controller;
 
 import com.kb.common.base.BaseResponse;
 import com.kb.video.service.LikeService;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 
@@ -16,7 +13,7 @@ public class LikeController {
     private LikeService likeService;
 
 
-    @PostMapping("/like/{videoId}")
+    @PostMapping("/likeIn/{videoId}")
     public BaseResponse increaseLike(@PathVariable("videoId") Long videoId) {
 
         likeService.increaseLike(videoId);
@@ -24,10 +21,19 @@ public class LikeController {
         return BaseResponse.success(null);
     }
 
+    @PostMapping("/likeDe/{videoId}")
     public BaseResponse decreaseLike(@PathVariable("videoId") Long videoId) {
 
         likeService.decreaseLike(videoId);
 
         return BaseResponse.success(null);
+    }
+
+    @GetMapping("/like/{videoId}")
+    public BaseResponse getLikes(@PathVariable("videoId") Long videoId) {
+
+        Long count = likeService.getLikes(videoId);
+
+        return BaseResponse.success(count);
     }
 }

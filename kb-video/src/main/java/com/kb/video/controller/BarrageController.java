@@ -63,9 +63,9 @@ public class BarrageController {
      */
     @PostMapping("/bar/{videoId}/{date}")
     @ApiOperation("添加一条")
-    public BaseResponse addBarrage(@PathVariable("videoId") Long videoId, @PathVariable("date") Date date, @RequestBody BarrageInfo barrageInfo) {
+    public BaseResponse addOneBarrage(@PathVariable("videoId") Long videoId, @PathVariable("date") Date date, @RequestBody BarrageInfo barrageInfo) {
 
-        barrageService.addBarrage(videoId, date, barrageInfo);
+        barrageService.addOneBarrage(videoId, date, barrageInfo);
 
         return BaseResponse.success(null);
 
