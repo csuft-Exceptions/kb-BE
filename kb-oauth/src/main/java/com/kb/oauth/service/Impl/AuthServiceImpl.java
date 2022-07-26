@@ -1,11 +1,15 @@
 package com.kb.oauth.service.Impl;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.kb.common.base.BaseResponse;
 import com.kb.common.utils.AssertUtil;
 import com.kb.common.utils.Base64Util;
 import com.kb.oauth.common.CookieToken;
 import com.kb.oauth.common.RedisToken;
+import com.kb.oauth.dao.SocialInfoMapper;
+import com.kb.oauth.dao.feign.UserFeign;
+import com.kb.oauth.pojo.SocialInfo;
 import com.kb.oauth.service.api.AuthService;
 import com.kb.oauth.util.AuthToken;
 import com.kb.oauth.vo.params.RegisterParam;
@@ -46,6 +50,10 @@ public class AuthServiceImpl implements AuthService {
     private RestTemplate restTemplate;
     @Autowired
     private CookieToken cookieToken;
+    @Resource
+    private UserFeign userFeign;
+    @Resource
+    private SocialInfoMapper socialInfoMapper;
     @Value("${auth.clientId}")
     private String clientId;
     @Value("${auth.clientSecret}")
@@ -90,6 +98,23 @@ public class AuthServiceImpl implements AuthService {
         //清除cookie
         cookieToken.clearCookie(response,accessToken,cookieDomain);
         return null;
+    }
+
+    @Override
+    public BaseResponse bind(String username,String socialId) {
+        AssertUtil.assertEmptyStr(username,"用户名不能为空");
+        SocialInfo socialInfo = socialInfoMapper.selectOne(socialId);
+        AssertUtil.assertNotNull(socialInfo,"已绑定");
+        BaseResponse userDetail = userFeign.detailByKey(username);
+        AssertUtil.assertNotEquals(userDetail.getCode(),200,"该账号未注册请先注册");
+        JSONObject userDetailJson = JSONObject.parseObject(userDetail.getData().toString());
+        Integer userId = Integer.valueOf(userDetailJson.getString("id"));
+
+        Integer insert = socialInfoMapper.insertOne(socialId, userId);
+        if (insert.equals(1)){
+            return BaseResponse.success("绑定成功");
+        }
+        return BaseResponse.failed("绑定失败");
     }
 
     /**
