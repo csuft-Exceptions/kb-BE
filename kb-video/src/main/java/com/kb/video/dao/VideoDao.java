@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.kb.video.dao.mapper.VideoMapper;
 import com.kb.video.pojo.VideoInfo;
+import com.kb.video.pojo.dto.VideoDto;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -38,5 +39,9 @@ public class VideoDao extends ServiceImpl<VideoMapper, VideoInfo> {
         );
 
         return videoInfo;
+    }
+
+    public boolean addVideoInfo(VideoInfo videoInfo) {
+        return this.save(videoInfo);
     }
 }

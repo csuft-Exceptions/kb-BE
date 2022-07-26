@@ -1,33 +1,43 @@
 package com.kb.video.pojo;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
+import io.swagger.annotations.ApiModel;
+import lombok.Builder;
 import lombok.Data;
 
 import java.util.Date;
 
 @Data
+@ApiModel
+@Builder
 public class VideoInfo {
+
+    @TableId(value = "id", type = IdType.INPUT)
     private Long id;
 
     private Long userId;
 
     private String name;
 
-    private Integer category;//分类
-
     private String url;
+
+    private Integer category;//分类
 
     private Date expirationTime;
 
     private Date createTime;
 
-    private int deleteState;
+    private Date updateTime;
 
-    private long likes;
+    private Integer deleteState;
 
-    private long plays;
+    private Long likes;
 
-    private long barrages;
+    private Long plays;
 
-    private long barragesId;
+    private Long barrages;
+
+    private Long barrageId;
 
 }

@@ -17,14 +17,16 @@ public class UvController {
 
     @Resource
     private RedisTemplate<String, String> redisTemplate;
+
     @GetMapping("/hlP")
-    public BaseResponse hlP(String videoId,String userId){
-        redisTemplate.opsForHyperLogLog().add("hl"+videoId,userId);
+    public BaseResponse hlP(String videoId, String userId) {
+        redisTemplate.opsForHyperLogLog().add("hl" + videoId, userId);
         return BaseResponse.success("success");
     }
+
     @GetMapping("/hlG")
-    public BaseResponse hlG(String videoId){
-        Long res=redisTemplate.opsForHyperLogLog().size("hl"+videoId);
+    public BaseResponse hlG(String videoId) {
+        Long res = redisTemplate.opsForHyperLogLog().size("hl" + videoId);
         return BaseResponse.success(res);
     }
 }
