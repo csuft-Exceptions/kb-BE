@@ -22,11 +22,10 @@ public class OSSUtil {
      * log日志
      */
     public static final Logger logger = LoggerFactory.getLogger(OSSUtil.class);
-    private String endpoint= "oss-cn-hangzhou.aliyuncs.com";
-    private String accessKeyId="LTAI5t7Mihhmt8wXkkstJTN4";
-    private String accessKeySecret="SglFevBI5Gw9fllKP9oBBqL2CFv5yR";
-    private String bucketName="yangkuitest";
-
+    private String endpoint = "oss-cn-hangzhou.aliyuncs.com";
+    private String accessKeyId = "LTAI5t7Mihhmt8wXkkstJTN4";
+    private String accessKeySecret = "SglFevBI5Gw9fllKP9oBBqL2CFv5yR";
+    private String bucketName = "yangkuitest";
 
 
     //上传视频
@@ -35,20 +34,21 @@ public class OSSUtil {
         String originalFilename = file.getOriginalFilename();
         String substring = originalFilename.substring(originalFilename.lastIndexOf(".")).toLowerCase();
         Random random = new Random();
-        String name = random.nextInt(10000)+ System.currentTimeMillis() + substring;
+        String name = random.nextInt(10000) + System.currentTimeMillis() + substring;
         try {
-            InputStream stream=file.getInputStream();
-            String filename=System.currentTimeMillis()+file.getOriginalFilename();
+            InputStream stream = file.getInputStream();
+            String filename = System.currentTimeMillis() + file.getOriginalFilename();
 //            OSSClient client=new OSSClient(endpoint,accessKeyId,accessKeySecret);
-            PutObjectResult result=ossClient.putObject(bucketName,"Video/"+name,stream);
+            PutObjectResult result = ossClient.putObject(bucketName, "Video/" + name, stream);
             ossClient.shutdown();
-            return "Video/"+name;
+            return "Video/" + name;
         } catch (Exception e) {
             throw new IOException("视频上传失败");
-        }finally {
+        } finally {
             ossClient.shutdown();
         }
     }
+
     /**
      * 获得url链接
      *
@@ -64,18 +64,20 @@ public class OSSUtil {
 
         ossClient.shutdown();
 
-        return  url.toString();
+        return url.toString();
     }
-    public List<OSSObjectSummary> getUrl(){
-        OSS ossClient = new OSSClientBuilder().build(endpoint,accessKeyId,accessKeySecret);
+
+    public List<OSSObjectSummary> getUrl() {
+        OSS ossClient = new OSSClientBuilder().build(endpoint, accessKeyId, accessKeySecret);
         //列举文件
         ObjectListing objectListing = ossClient.listObjects(bucketName);
         List<OSSObjectSummary> sums = objectListing.getObjectSummaries();
         ossClient.shutdown();
         return sums;
     }
+
     //从OSS下载文件
-    public void downloadVideo(String objectName,String pathName){
+    public void downloadVideo(String objectName, String pathName) {
 //        填写Object完整路径，例如exampledir/exampleobject.txt。Object完整路径中不能包含Bucket名称
 //        String objectName = "testfolder/exampleobject.txt";
 //        String pathName = "D:\\localpath\\examplefile.txt";
@@ -83,7 +85,7 @@ public class OSSUtil {
         try {
             // 下载Object到本地文件，并保存到指定的本地路径中。如果指定的本地文件存在会覆盖，不存在则新建。
             // 如果未指定本地路径，则下载后的文件默认保存到示例程序所属项目对应本地路径中。
-            ossClient.getObject(new GetObjectRequest(bucketName, objectName),new File(pathName));
+            ossClient.getObject(new GetObjectRequest(bucketName, objectName), new File(pathName));
         } catch (OSSException oe) {
             System.out.println("Caught an OSSException, which means your request made it to OSS, "
                     + "but was rejected with an error response for some reason.");

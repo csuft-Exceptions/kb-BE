@@ -32,8 +32,8 @@ public class SwaggerConfig {
     //基本信息的配置，信息会在api文档上显示
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                .title("zg测试的接口文档")
-                .description("xx相关接口的文档")
+                .title("vd接口文档")
+                .description("相关接口的文档")
                 .termsOfServiceUrl("http://localhost:8080/hello")
                 .version("1.0")
                 .build();

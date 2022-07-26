@@ -1,5 +1,7 @@
 package com.kb.video.pojo;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
 import io.swagger.annotations.ApiModel;
 import lombok.Builder;
 import lombok.Data;
@@ -10,6 +12,8 @@ import java.util.Date;
 @ApiModel
 @Builder
 public class VideoInfo {
+
+    @TableId(value = "id", type = IdType.INPUT)
     private Long id;
 
     private Long userId;

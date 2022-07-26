@@ -4,6 +4,8 @@ package com.kb.video.controller;
 import com.kb.common.base.BaseResponse;
 import com.kb.video.pojo.BarrageInfo;
 import com.kb.video.service.BarrageService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -11,6 +13,7 @@ import java.util.Date;
 import java.util.List;
 
 @RestController
+@Api("barrage")
 public class BarrageController {
 
     @Resource
@@ -25,6 +28,7 @@ public class BarrageController {
      * @return
      */
     @GetMapping("/bar/{videoId}/{date}")
+    @ApiOperation("以时间为单位分片获取")
     public BaseResponse getBarrageByTime(@PathVariable("videoId") Long videoId, @PathVariable("date") Date date) {
 
         List<BarrageInfo> barrages = barrageService.getBarrageByTime(videoId, date);
@@ -40,6 +44,7 @@ public class BarrageController {
      * @return
      */
     @GetMapping("/bar/{videoId}")
+    @ApiOperation("获取所有")
     public BaseResponse getAllBarrage(@PathVariable("videoId") Long videoId) {
 
         List<BarrageInfo> res = barrageService.getAllBarrage(videoId);
@@ -57,6 +62,7 @@ public class BarrageController {
      * @return
      */
     @PostMapping("/bar/{videoId}/{date}")
+    @ApiOperation("添加一条")
     public BaseResponse addBarrage(@PathVariable("videoId") Long videoId, @PathVariable("date") Date date, @RequestBody BarrageInfo barrageInfo) {
 
         barrageService.addBarrage(videoId, date, barrageInfo);
