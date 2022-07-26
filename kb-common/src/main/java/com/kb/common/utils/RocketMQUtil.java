@@ -22,7 +22,7 @@ public class RocketMQUtil {
      */
     public static void syncSendMsg(DefaultMQProducer producer, Message msg){
         try {
-           SendResult result = producer.send(msg);
+            SendResult result = producer.send(msg);
             log.info(result.toString());
         } catch (Exception e) {
             log.error("发送消息失败",e);
@@ -35,11 +35,15 @@ public class RocketMQUtil {
      * @param producer
      * @param msg
      */
-    public static void asyncSendMsg(DefaultMQProducer producer,Message msg) {
+    public static void asyncSendMsg(DefaultMQProducer producer,Message msg,boolean delay) {
         int messageCount=2;
         CountDownLatch2 countDownLatch2 =new CountDownLatch2(messageCount);
         for(int i=0;i<messageCount;i++){
             try {
+                if(delay){
+                    msg.setDelayTimeLevel(18);
+                    log.info("延迟消息准备成功");
+                }
                 producer.send(msg, new SendCallback() {
                     @Override
                     public void onSuccess(SendResult sendResult) {
@@ -61,4 +65,6 @@ public class RocketMQUtil {
 
         }
     }
+
+
 }
