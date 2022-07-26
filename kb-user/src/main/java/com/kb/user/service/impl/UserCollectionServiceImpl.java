@@ -47,4 +47,10 @@ public class UserCollectionServiceImpl implements UserCollectionService {
         PageInfo<UserCollection> pageInfo=new PageInfo<>(list);
         return BaseResponse.success(pageInfo.getList(),pageInfo.getList().size());
     }
+
+    @Override
+    public BaseResponse count(Long videoId) {
+        Long count=userCollectionMapper.count(videoId);
+        return BaseResponse.success(count);
+    }
 }

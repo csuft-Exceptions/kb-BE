@@ -61,4 +61,13 @@
             id
         desc
     </select>
+
+    <select id="count" resultType="java.lang.Long">
+        select
+            count(1)
+        from
+            t_user_collection
+        where
+            content_id=#{videoId,jdbcType=BIGINT}
+    </select>
 </mapper>

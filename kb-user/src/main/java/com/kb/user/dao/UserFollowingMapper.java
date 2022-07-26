@@ -29,7 +29,31 @@ public interface UserFollowingMapper {
      */
     Integer delete(Long id);
 
+    /**
+     * 关注列表
+     * @param userFollowingParam
+     * @return
+     */
     List<UserFollowing> list(UserFollowingParam userFollowingParam);
 
+    /**
+     * 粉丝列表
+     * @param followingId
+     * @return
+     */
     List<UserFollowing> fans(Long followingId);
+
+    /**
+     * 粉丝数
+     * @param followingId
+     * @return
+     */
+    Long fansCount(Long followingId);
+
+    /**
+     * 关注数
+     * @param userId
+     * @return
+     */
+    Long followingCount(Long userId);
 }

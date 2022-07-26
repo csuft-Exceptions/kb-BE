@@ -30,4 +30,11 @@ public interface UserCollectionService {
      * @return
      */
     BaseResponse list(UserCollectionParam userCollectionParam);
+
+    /**
+     * 查询收藏数
+     * @param videoId
+     * @return
+     */
+    BaseResponse count(Long videoId);
 }

@@ -43,4 +43,9 @@ public class UserCollectionController {
     public BaseResponse list(UserCollectionParam userCollectionParam){
         return userCollectionService.list(userCollectionParam);
     }
+
+    @GetMapping("collectCount")
+    public BaseResponse count(Long videoId){
+        return userCollectionService.count(videoId);
+    }
 }

@@ -38,4 +38,19 @@ public interface UserFollowingService {
      * @return
      */
     BaseResponse fans(Long followingId);
+
+
+    /**
+     * 粉丝数
+     * @param followingId
+     * @return
+     */
+    BaseResponse fansCount(Long followingId);
+
+    /**
+     * 关注数
+     * @param userId
+     * @return
+     */
+    BaseResponse followingCount(Long userId);
 }
