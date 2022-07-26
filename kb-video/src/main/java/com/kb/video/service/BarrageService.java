@@ -38,7 +38,7 @@ public class BarrageService {
         return res;
     }
 
-    public void addBarrage(Long videoId, Date date, BarrageInfo barrageInfo) {
+    public void addOneBarrage(Long videoId, Date date, BarrageInfo barrageInfo) {
 
         List<BarrageInfo> barrages = (List<BarrageInfo>) redisTemplate.opsForHash().get("barrage" + videoId, date.toString());
 

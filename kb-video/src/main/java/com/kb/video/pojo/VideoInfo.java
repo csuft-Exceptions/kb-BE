@@ -13,7 +13,7 @@ import java.util.Date;
 @Builder
 public class VideoInfo {
 
-    @TableId(value = "id", type = IdType.INPUT)
+    @TableId(value = "id", type = IdType.AUTO)
     private Long id;
 
     private Long userId;
@@ -39,5 +39,7 @@ public class VideoInfo {
     private Long barrages;
 
     private Long barrageId;
+
+    private Long picId;
 
 }

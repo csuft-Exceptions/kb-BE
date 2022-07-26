@@ -28,7 +28,7 @@ public class BarrageController {
      * @return
      */
     @GetMapping("/bar/{videoId}/{date}")
-    @ApiOperation("以时间为单位分片获取")
+    @ApiOperation("以时间为单位分片获取dm")
     public BaseResponse getBarrageByTime(@PathVariable("videoId") Long videoId, @PathVariable("date") Date date) {
 
         List<BarrageInfo> barrages = barrageService.getBarrageByTime(videoId, date);
@@ -44,7 +44,7 @@ public class BarrageController {
      * @return
      */
     @GetMapping("/bar/{videoId}")
-    @ApiOperation("获取所有")
+    @ApiOperation("获取所有dm")
     public BaseResponse getAllBarrage(@PathVariable("videoId") Long videoId) {
 
         List<BarrageInfo> res = barrageService.getAllBarrage(videoId);
@@ -62,10 +62,10 @@ public class BarrageController {
      * @return
      */
     @PostMapping("/bar/{videoId}/{date}")
-    @ApiOperation("添加一条")
-    public BaseResponse addBarrage(@PathVariable("videoId") Long videoId, @PathVariable("date") Date date, @RequestBody BarrageInfo barrageInfo) {
+    @ApiOperation("添加一条dm")
+    public BaseResponse addOneBarrage(@PathVariable("videoId") Long videoId, @PathVariable("date") Date date, @RequestBody BarrageInfo barrageInfo) {
 
-        barrageService.addBarrage(videoId, date, barrageInfo);
+        barrageService.addOneBarrage(videoId, date, barrageInfo);
 
         return BaseResponse.success(null);
 
