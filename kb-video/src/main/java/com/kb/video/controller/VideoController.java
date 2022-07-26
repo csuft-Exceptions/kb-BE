@@ -114,12 +114,9 @@ public class VideoController {
     @PostMapping("/videoinfo")
     public BaseResponse addVideoInfo(@RequestBody VideoDto videoDto) {
 
-        boolean isDone = videoService.addVideoInfo(videoDto);
+        Long id = videoService.addVideoInfo(videoDto);
 
-        if (!isDone) {
-            throw new InfoException("添加失败");
-        }
-        return BaseResponse.success(null);
+        return BaseResponse.success(id);
     }
 
 

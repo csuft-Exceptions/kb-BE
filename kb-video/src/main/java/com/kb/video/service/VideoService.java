@@ -38,7 +38,7 @@ public class VideoService {
         return videoInfo;
     }
 
-    public boolean addVideoInfo(VideoDto videoDto) {
+    public Long addVideoInfo(VideoDto videoDto) {
         OSSUtil ossUtil = new OSSUtil();
         List<OSSObjectSummary> urls = ossUtil.getUrl();
         Set<String> set = urls.stream().map(x -> x.getKey()).collect(Collectors.toSet());
@@ -55,6 +55,8 @@ public class VideoService {
                 .name(videoDto.getName())
                 .url(url)
                 .build();
-        return videoDao.addVideoInfo(videoInfo);
+        videoDao.addVideoInfo(videoInfo);
+
+        return videoInfo.getId();
     }
 }
