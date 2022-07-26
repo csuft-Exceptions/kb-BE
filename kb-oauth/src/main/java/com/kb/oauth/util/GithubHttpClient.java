@@ -12,6 +12,8 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 
 import java.io.IOException;
+import java.security.KeyManagementException;
+import java.security.NoSuchAlgorithmException;
 
 /**
  * @author wjx
@@ -25,8 +27,8 @@ public class GithubHttpClient {
      * @return
      * @throws IOException
      */
-    public static JSONObject getAccessToken(String url) throws IOException {
-        HttpClient client = HttpClients.createDefault();
+    public static JSONObject getAccessToken(String url) throws Exception {
+        HttpClient client = SSLClientCustom.getCloseableHttpClient();
         HttpPost httpPost = new HttpPost(url);
         httpPost.setHeader("Accept","application/json");
         HttpResponse response = client.execute(httpPost);
@@ -47,11 +49,11 @@ public class GithubHttpClient {
      * @return
      * @throws IOException
      */
-    public static JSONObject getUserInfo(String url,String token) throws IOException {
-        CloseableHttpClient client = HttpClients.createDefault();
+    public static JSONObject getUserInfo(String url,String token) throws Exception {
+        CloseableHttpClient client = SSLClientCustom.getCloseableHttpClient();
         HttpGet httpGet = new HttpGet(url);
         httpGet.setHeader("Accept","application/json");
-        httpGet.setHeader("Authorization","token"+token);
+        httpGet.setHeader("Authorization","token "+token);
         CloseableHttpResponse response = client.execute(httpGet);
         HttpEntity entity = response.getEntity();
         if (entity != null){

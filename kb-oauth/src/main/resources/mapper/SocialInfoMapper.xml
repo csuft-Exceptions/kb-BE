@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kb.oauth.dao.SocialInfoMapper">
+    <insert id="insertOne">
+        insert into social_Info (social_id,user_id) values (#{socialId},#{userId})
+    </insert>
+
+
+    <select id="selectOne" resultType="com.kb.oauth.pojo.SocialInfo">
+        select * from social_Info where social_id = #{socialId}
+    </select>
+</mapper>

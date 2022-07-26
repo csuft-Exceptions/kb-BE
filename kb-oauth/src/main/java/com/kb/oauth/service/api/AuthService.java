@@ -23,4 +23,6 @@ public interface AuthService {
      * @return
      */
     BaseResponse logout(HttpServletRequest request);
+
+    BaseResponse bind(String username,String socialId);
 }

@@ -2,7 +2,7 @@ package com.kb.oauth.service.Impl;
 
 import com.alibaba.fastjson.JSON;
 import com.kb.common.base.BaseResponse;
-import com.kb.oauth.dao.UserFeign;
+import com.kb.oauth.dao.feign.UserFeign;
 import com.kb.oauth.util.UserJwt;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.security.core.Authentication;

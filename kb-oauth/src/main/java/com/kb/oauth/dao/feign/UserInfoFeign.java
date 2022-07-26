@@ -1,4 +1,4 @@
-package com.kb.oauth.dao;
+package com.kb.oauth.dao.feign;
 
 import com.alibaba.fastjson.JSONObject;
 import com.kb.common.base.BaseResponse;
