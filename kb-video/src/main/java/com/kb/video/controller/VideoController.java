@@ -2,17 +2,18 @@ package com.kb.video.controller;
 
 import com.aliyun.oss.model.OSSObjectSummary;
 import com.kb.common.base.BaseResponse;
-import com.kb.common.exception.InfoException;
 import com.kb.video.pojo.VideoInfo;
 import com.kb.video.pojo.dto.VideoDto;
 import com.kb.video.service.VideoService;
 import com.kb.video.utils.OSSUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 /**
@@ -26,6 +27,9 @@ public class VideoController {
 
     @Resource
     VideoService videoService;
+
+    @Resource
+    RedisTemplate<String,String> redisTemplate;
 
     @RequestMapping("/getVideo")
     public String downloadVideo() {
@@ -115,7 +119,9 @@ public class VideoController {
     public BaseResponse addVideoInfo(@RequestBody VideoDto videoDto) {
 
         Long id = videoService.addVideoInfo(videoDto);
-
+        redisTemplate.opsForSet().add("top", id.toString());
+        // 过期时间为3天 实际为71小时
+        redisTemplate.opsForValue().set(id.toString(), String.valueOf(videoDto.getCategory()), 255600, TimeUnit.SECONDS);
         return BaseResponse.success(id);
     }
 
