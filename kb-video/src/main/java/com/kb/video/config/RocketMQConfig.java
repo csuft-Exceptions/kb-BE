@@ -106,8 +106,8 @@ public class RocketMQConfig {
     }
 
     private double getScore(VideoInfo videoInfo) {
-        return videoInfo.getBarrages()*10+videoInfo.getLikes()*5+
-                videoInfo.getPlays()*8+
+        return videoInfo.getBarrages()*10+(Long) redisTemplate.opsForHash().get("like",videoInfo.getId())*5+
+                redisTemplate.opsForHyperLogLog().size("hl" + videoInfo.getId())*20+
                 TimeUtil.between(TimeUtil.getDateTime(videoInfo.getCreateTime()),
                         TimeUtil.getDateTime(new Date()), ChronoUnit.HOURS)*15;
     }
