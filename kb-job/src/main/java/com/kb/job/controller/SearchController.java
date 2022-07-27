@@ -1,5 +1,6 @@
 package com.kb.job.controller;
 
+import com.kb.common.base.BaseResponse;
 import com.kb.job.service.impl.ElasticSearchService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -16,7 +17,14 @@ public class SearchController {
     @Resource
     private ElasticSearchService elasticSearchService;
     @GetMapping("/es-videos")
-    public void getEsVideos(@RequestParam String keyword){
-        elasticSearchService.getVideo(keyword);
+    public BaseResponse getEsVideos(@RequestParam String keyword){
+        return BaseResponse.success(elasticSearchService.getVideo(keyword));
     }
+    @GetMapping("contents")
+    public BaseResponse getContents(@RequestParam String keyword,
+                                    @RequestParam Integer pageNo,
+                                    @RequestParam Integer pageSize){
+        return BaseResponse.success(elasticSearchService.getContents(keyword, pageNo, pageSize));
+    }
+
 }
