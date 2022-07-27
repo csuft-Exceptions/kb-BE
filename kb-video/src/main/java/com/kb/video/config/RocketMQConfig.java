@@ -53,7 +53,7 @@ public class RocketMQConfig {
         try {
             producer.start();
             // 启动时发送第一条消息
-            Message msg2=new Message("Topic-top",null);
+            Message msg2=new Message("Topic-top",new byte[1]);
             RocketMQUtil.asyncSendMsg(producer,msg2,true);
         } catch (MQClientException e) {
             log.error("TopGroup消息队列启动失败",e);
@@ -92,7 +92,7 @@ public class RocketMQConfig {
                         redisTemplate.opsForSet().remove("top", s);
                     }
                 }
-                Message msg2=new Message("Topic-top",null);
+                Message msg2=new Message("Topic-top",new byte[1]);
                 DefaultMQProducer producer=(DefaultMQProducer)applicationContext.getBean("topProducer");
                 RocketMQUtil.asyncSendMsg(producer,msg2,true);
                 return ConsumeConcurrentlyStatus.CONSUME_SUCCESS;

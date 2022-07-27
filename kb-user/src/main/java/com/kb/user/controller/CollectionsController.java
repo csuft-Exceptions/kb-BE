@@ -17,27 +17,27 @@ public class CollectionsController {
     @Resource
     private CollectionsService collectionsService;
 
-    @GetMapping("/followingGroup/list/{userId}")
+    @GetMapping("/collections/list/{userId}")
     public BaseResponse list(@PathVariable Long userId){
         return collectionsService.list(userId);
     }
 
-    @PostMapping("/followingGroup")
+    @PostMapping("/collections")
     public BaseResponse add(@RequestBody Collections collections){
         return collectionsService.add(collections);
     }
 
-    @PutMapping("/followingGroup")
+    @PutMapping("/collections")
     public BaseResponse update(@RequestBody Collections collections){
         return collectionsService.update(collections);
     }
 
-    @DeleteMapping("/followingGroup/{id}")
+    @DeleteMapping("/collections/{id}")
     public BaseResponse delete(@PathVariable Long id){
         return collectionsService.delete(id);
     }
 
-    @GetMapping("/followingGroup/{id}")
+    @GetMapping("/collections/{id}")
     public BaseResponse detail(@PathVariable Long id){
         return collectionsService.detail(id);
     }
