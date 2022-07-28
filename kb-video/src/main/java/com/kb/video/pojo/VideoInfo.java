@@ -27,7 +27,7 @@ public class VideoInfo {
 
     private Integer category;//分类
 
-    private Date expirationTime;
+    private Long duration;
 
     private Date createTime;
 
