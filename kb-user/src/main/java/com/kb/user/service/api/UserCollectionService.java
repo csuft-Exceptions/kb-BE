@@ -32,9 +32,16 @@ public interface UserCollectionService {
     BaseResponse list(UserCollectionParam userCollectionParam);
 
     /**
-     * 查询收藏数
-     * @param videoId
+     * 查询视频收藏数
+     * @param contentId
      * @return
      */
-    BaseResponse count(Long videoId);
+    BaseResponse count(Long contentId);
+
+    /**
+     * 查询用户收藏数
+     * @param userId
+     * @return
+     */
+    BaseResponse userCollectCount(Long userId);
 }

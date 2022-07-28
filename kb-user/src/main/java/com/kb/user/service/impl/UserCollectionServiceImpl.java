@@ -49,8 +49,14 @@ public class UserCollectionServiceImpl implements UserCollectionService {
     }
 
     @Override
-    public BaseResponse count(Long videoId) {
-        Long count=userCollectionMapper.count(videoId);
+    public BaseResponse count(Long contentId) {
+        Long count=userCollectionMapper.count(contentId);
+        return BaseResponse.success(count);
+    }
+
+    @Override
+    public BaseResponse userCollectCount(Long userId) {
+        Long count=userCollectionMapper.userCollectCount(userId);
         return BaseResponse.success(count);
     }
 }

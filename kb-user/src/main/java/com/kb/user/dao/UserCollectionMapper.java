@@ -39,5 +39,12 @@ public interface UserCollectionMapper {
      * @param videoId
      * @return
      */
-    Long count(Long videoId);
+    Long count(Long contentId);
+
+    /**
+     * 用户数量
+     * @param userId
+     * @return
+     */
+    Long userCollectCount(Long userId);
 }

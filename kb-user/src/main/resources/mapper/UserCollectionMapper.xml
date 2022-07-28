@@ -68,6 +68,19 @@
         from
             t_user_collection
         where
-            content_id=#{videoId,jdbcType=BIGINT}
+            content_id=#{contentId,jdbcType=BIGINT}
+        and
+            delete_state=0
+    </select>
+
+    <select id="userCollectCount" resultType="java.lang.Long">
+        select
+                count(1)
+        from
+                t_user_collection
+        where
+                user_id=#{userId,jdbcType=BIGINT}
+        and
+            delete_state=0
     </select>
 </mapper>
