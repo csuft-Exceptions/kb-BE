@@ -40,12 +40,13 @@ public class RocketMQConfig {
     @Resource
     private UserFollowingMapper userFollowingMapper;
 
-    @Bean("momentProducer")
-    public DefaultMQProducer momentProducer(){
+    @Bean("momentsProducer")
+    public DefaultMQProducer momentsProducer(){
         DefaultMQProducer producer=new DefaultMQProducer("MomentsGroup");
         producer.setNamesrvAddr(nameSeverAddr);
         try {
             producer.start();
+            log.info("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<启动成功<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
         } catch (MQClientException e) {
             log.error("MomentsGroup消息队列启动失败",e);
             throw new InfoException("RockerMQ启动失败",e);
@@ -53,13 +54,13 @@ public class RocketMQConfig {
         return producer;
     }
 
-    @Bean("momentConsumer")
-    public DefaultMQPushConsumer momentConsumer(){
+    @Bean("momentsConsumer")
+    public DefaultMQPushConsumer momentsConsumer(){
         DefaultMQPushConsumer consumer=new DefaultMQPushConsumer("MomentsGroup");
         consumer.setNamesrvAddr(nameSeverAddr);
         // *代表订阅所有
         try {
-            consumer.subscribe("Topic-moments","*");
+            consumer.subscribe("Topic-Moments","*");
             // 监听者,注册并发的监听器,只有一条消息,所以只取第一个
             consumer.registerMessageListener((MessageListenerConcurrently) (list, consumeConcurrentlyContext) -> {
                 MessageExt msg=list.get(0);
