@@ -1,5 +1,7 @@
 package com.kb.user.pojo.userMoment;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.util.Date;
 
 /**
@@ -16,8 +18,10 @@ public class UserMoment {
 
     private Long contentId;
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date createTime;
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date updateTime;
 
     private Integer deleteState;

@@ -43,4 +43,15 @@
             SELECT LAST_INSERT_ID()
         </selectKey>
     </insert>
+
+    <select id="detail" resultMap="BaseResultMap">
+        select
+            <include refid="Base_Column_List"/>
+        from
+            t_user_moments
+        where
+            id=#{count,jdbcType=BIGINT}
+        and
+            delete_state=0;
+    </select>
 </mapper>
