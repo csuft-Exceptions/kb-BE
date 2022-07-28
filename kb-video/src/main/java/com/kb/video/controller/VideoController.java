@@ -3,6 +3,7 @@ package com.kb.video.controller;
 import com.aliyun.oss.model.OSSObjectSummary;
 import com.kb.common.base.BaseResponse;
 import com.kb.video.pojo.VideoInfo;
+import com.kb.video.pojo.rich.VideoInfoRich;
 import com.kb.video.pojo.dto.VideoDto;
 import com.kb.video.service.VideoService;
 import com.kb.video.utils.OSSUtil;
@@ -46,7 +47,7 @@ public class VideoController {
      * @param key
      * @return
      */
-    @ApiOperation("获取指定key的url")
+    @ApiOperation("获取指定name的url")
     @GetMapping("/url/{key}")
     public BaseResponse getUrl(@PathVariable("key") String key) {
         OSSUtil ossUtil = new OSSUtil();
@@ -78,7 +79,7 @@ public class VideoController {
     @ApiOperation("查询所有视频信息")
     @GetMapping("/videoinfo")
     public BaseResponse getAllVideoInfo() {
-        List<VideoInfo> videoInfoList = videoService.getAllVideoInfo();
+        List<VideoInfoRich> videoInfoList = videoService.getAllVideoInfo();
         return BaseResponse.success(videoInfoList);
     }
 
@@ -90,8 +91,8 @@ public class VideoController {
      */
     @ApiOperation("查询用户的所有视频")
     @GetMapping("/videoinfo/{userId}")
-    public BaseResponse getVideoInfoByUserId(@PathVariable("userId") Long userId) {
-        List<VideoInfo> videoInfoList = videoService.getVideoInfoByUserId(userId);
+    public BaseResponse getVideoInfoRichByUserId(@PathVariable("userId") Long userId) {
+        List<VideoInfoRich> videoInfoList = videoService.getVideoInfoByUserId(userId);
         return BaseResponse.success(videoInfoList);
     }
 

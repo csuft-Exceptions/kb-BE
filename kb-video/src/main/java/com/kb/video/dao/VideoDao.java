@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.kb.common.exception.InfoException;
 import com.kb.video.dao.mapper.VideoMapper;
 import com.kb.video.pojo.VideoInfo;
+import com.kb.video.pojo.VideoPic;
 import com.kb.video.pojo.dto.VideoDto;
 import org.springframework.stereotype.Component;
 
@@ -54,4 +55,6 @@ public class VideoDao extends ServiceImpl<VideoMapper, VideoInfo> {
         }
         return videoInfo.getId();
     }
+
+
 }
