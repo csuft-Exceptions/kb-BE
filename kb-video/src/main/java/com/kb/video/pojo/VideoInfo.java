@@ -43,7 +43,7 @@ public class VideoInfo {
 
     private Long barrageId;
 
-    private Long picId;
+    private String picUrl;
 
     String Introduction;
 

@@ -3,10 +3,8 @@ package com.kb.video.service;
 import com.aliyun.oss.model.OSSObjectSummary;
 import com.kb.common.exception.InfoException;
 import com.kb.video.dao.VideoDao;
-import com.kb.video.dao.VideoPicDao;
 import com.kb.video.pojo.VideoInfo;
 import com.kb.video.pojo.dto.VideoDto;
-import com.kb.video.pojo.rich.VideoInfoRich;
 import com.kb.video.utils.OSSUtil;
 import org.springframework.stereotype.Service;
 
@@ -24,38 +22,33 @@ public class VideoService {
     @Resource
     VideoDao videoDao;
 
-    @Resource
-    VideoPicDao videoPicDao;
 
-    public List<VideoInfoRich> getAllVideoInfo() {
-        List<VideoInfo> videoInfoList = videoDao.getAllVideoInfo();
-        return videoInfoListToRich(videoInfoList);
+    public List<VideoInfo> getAllVideoInfo() {
+        return videoDao.getAllVideoInfo();
     }
 
-    private List<VideoInfoRich> videoInfoListToRich(List<VideoInfo> videoInfoList) {
-        List<VideoInfoRich> videoInfoRichList = new ArrayList<>();
-        for (VideoInfo videoInfo : videoInfoList) {
-            String picUrl = videoPicDao.getPicUrlById(videoInfo.getPicId());
-            videoInfoRichList.add(VideoInfoRich.builder()
-                    .category(videoInfo.getCategory())
-                    .id(videoInfo.getId())
-                    .name(videoInfo.getName())
-                    .userId(videoInfo.getUserId())
-                    .url(videoInfo.getUrl())
-                    .picUrl(picUrl)
-                    .build());
-        }
-        return videoInfoRichList;
-    }
+//    private List<VideoInfoRich> videoInfoListToRich(List<VideoInfo> videoInfoList) {
+//        List<VideoInfoRich> videoInfoRichList = new ArrayList<>();
+//        for (VideoInfo videoInfo : videoInfoList) {
+//            String picUrl = videoPicDao.getPicUrlById(videoInfo.getPicId());
+//            videoInfoRichList.add(VideoInfoRich.builder()
+//                    .category(videoInfo.getCategory())
+//                    .id(videoInfo.getId())
+//                    .name(videoInfo.getName())
+//                    .userId(videoInfo.getUserId())
+//                    .url(videoInfo.getUrl())
+//                    .picUrl(picUrl)
+//                    .build());
+//        }
+//        return videoInfoRichList;
+//    }
 
-    public List<VideoInfoRich> getVideoInfoByUserId(Long userId) {
-        List<VideoInfo> videoInfoList = videoDao.getVideoInfoByUserId(userId);
-        return videoInfoListToRich(videoInfoList);
+    public List<VideoInfo> getVideoInfoByUserId(Long userId) {
+        return videoDao.getVideoInfoByUserId(userId);
     }
 
     public VideoInfo getVideoInfoById(Long id) {
-        VideoInfo videoInfo = videoDao.getVideoInfoById(id);
-        return videoInfo;
+        return videoDao.getVideoInfoById(id);
     }
 
     public Long addVideoInfo(VideoDto videoDto) {
