@@ -47,4 +47,16 @@ public class UserCollectionServiceImpl implements UserCollectionService {
         PageInfo<UserCollection> pageInfo=new PageInfo<>(list);
         return BaseResponse.success(pageInfo.getList(),pageInfo.getList().size());
     }
+
+    @Override
+    public BaseResponse count(Long contentId) {
+        Long count=userCollectionMapper.count(contentId);
+        return BaseResponse.success(count);
+    }
+
+    @Override
+    public BaseResponse userCollectCount(Long userId) {
+        Long count=userCollectionMapper.userCollectCount(userId);
+        return BaseResponse.success(count);
+    }
 }

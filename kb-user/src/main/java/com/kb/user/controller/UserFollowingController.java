@@ -45,4 +45,25 @@ public class UserFollowingController {
         return userFollowingService.fans(followingId);
     }
 
+    /**
+     * todo 索引
+     * @param followingId
+     * @return
+     */
+    @GetMapping("/fansCount")
+    public BaseResponse fansCount(Long followingId){
+        return userFollowingService.fansCount(followingId);
+    }
+
+    /**
+     * todo 索引
+     * @param userId
+     * @return
+     */
+    @GetMapping("/followingCount")
+    public BaseResponse followingCount(Long userId){
+        return userFollowingService.followingCount(userId);
+    }
+
+
 }

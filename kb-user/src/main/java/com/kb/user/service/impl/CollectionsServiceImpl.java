@@ -32,8 +32,8 @@ public class CollectionsServiceImpl implements CollectionsService {
     @Override
     public BaseResponse add(Collections collections) {
         Integer count=collectionsMapper.add(collections);
-        AssertUtil.assertNotEquals(1,count,"收藏操作失败,请重试!");
-        return BaseResponse.success("收藏成功!");
+        AssertUtil.assertNotEquals(1,count,"添加收藏夹操作失败,请重试!");
+        return BaseResponse.success("添加收藏夹成功!");
     }
 
     @Override

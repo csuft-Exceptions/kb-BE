@@ -28,12 +28,12 @@ public class CommentController {
         return commentService.getSecondComment(secondCommentParam);
     }
     @PostMapping("/reply")
-    public BaseResponse replay(Comment comment){
+    public BaseResponse replay(@RequestBody Comment comment){
         return commentService.reply(comment);
     }
 
     @PutMapping("/comment")
-    public BaseResponse update(Comment comment){
+    public BaseResponse update(@RequestBody Comment comment){
         return commentService.update(comment);
     }
 

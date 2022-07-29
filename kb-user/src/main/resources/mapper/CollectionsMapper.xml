@@ -54,8 +54,8 @@
             <if test="userId!=null">
                 #{userId,jdbcType=BIGINT},
             </if>
-            <if test="groupName !=null and groupName !=''">
-                #{groupName,jdbcType=VARCHAR},
+            <if test="collectionName !=null and collectionName !=''">
+                #{collectionName,jdbcType=VARCHAR},
             </if>
             1,
             now()

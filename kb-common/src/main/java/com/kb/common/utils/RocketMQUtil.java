@@ -8,6 +8,8 @@ import org.apache.rocketmq.client.producer.SendResult;
 import org.apache.rocketmq.common.CountDownLatch2;
 import org.apache.rocketmq.common.message.Message;
 
+import java.util.concurrent.TimeUnit;
+
 /**
  * @author mawz
  * @version 1.0
@@ -57,6 +59,7 @@ public class RocketMQUtil {
                         log.error("发送消息的时候发生了异常",e);
                     }
                 });
+                countDownLatch2.await(5, TimeUnit.SECONDS);
             } catch (Exception e) {
                 countDownLatch2.countDown();
                 log.error("发送消息的时候发生了异常",e);

@@ -37,9 +37,10 @@ public class UserMomentServiceImpl implements UserMomentService {
 
     @Override
     public BaseResponse addUserMoments(UserMoment userMoment) {
-        Integer count=userMomentMapper.addUserMoments(userMoment);
+        userMomentMapper.addUserMoments(userMoment);
+        userMoment=userMomentMapper.detail(userMoment.getId());
         DefaultMQProducer producer=(DefaultMQProducer)applicationContext.getBean("momentsProducer");
-        Message msg=new Message("Topic-moments", JSONObject.toJSONString(userMoment).getBytes(StandardCharsets.UTF_8));
+        Message msg=new Message("Topic-Moments", JSONObject.toJSONString(userMoment).getBytes(StandardCharsets.UTF_8));
         RocketMQUtil.syncSendMsg(producer,msg);
         return BaseResponse.success("创建动态成功");
     }
