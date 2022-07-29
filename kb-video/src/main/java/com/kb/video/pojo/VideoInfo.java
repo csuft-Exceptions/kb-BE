@@ -6,6 +6,7 @@ import io.swagger.annotations.ApiModel;
 import lombok.Builder;
 import lombok.Data;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -14,7 +15,7 @@ import java.util.Date;
 @Data
 @ApiModel
 @Builder
-public class VideoInfo {
+public class VideoInfo implements Serializable {
 
     @TableId(value = "id", type = IdType.AUTO)
     private Long id;

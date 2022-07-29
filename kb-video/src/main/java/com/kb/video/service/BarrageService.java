@@ -17,33 +17,39 @@ public class BarrageService {
     @Resource
     RedisTemplate redisTemplate;
 
-    public List<BarrageInfo> getBarrageByTime(Long videoId, Date date) {
+    public List<BarrageInfo> getBarrageByTime(Long videoId, int offset) {
 
-        return (List<BarrageInfo>) redisTemplate.opsForHash().get("barrage" + videoId, date.toString());
+        offset = offset - offset % 60;
+
+        return (List<BarrageInfo>) redisTemplate.opsForHash().get("barrage" + videoId, offset);
     }
 
     public List<BarrageInfo> getAllBarrage(Long videoId) {
 
         Map<String, List<BarrageInfo>> map = redisTemplate.opsForHash().entries("barrage" + videoId);
 
-        List<BarrageInfo> res = new ArrayList<>();
+        if(map.isEmpty())return null;
 
-        map.entrySet().stream().map(x -> {
-            x.getValue().stream().map(y -> {
-                res.add(y);
-                return y;
-            });
+        List<BarrageInfo> res = map.entrySet().stream().reduce((x, y) -> {
+            x.getValue().addAll(y.getValue());
             return x;
-        });
+        }).get().getValue();
+
         return res;
     }
 
-    public void addOneBarrage(Long videoId, Date date, BarrageInfo barrageInfo) {
+    public void addOneBarrage(Long videoId, BarrageInfo barrageInfo) {
 
-        List<BarrageInfo> barrages = (List<BarrageInfo>) redisTemplate.opsForHash().get("barrage" + videoId, date.toString());
+        int offset = barrageInfo.getOffsetTime();
+
+        offset = offset - offset % 60;
+
+        List<BarrageInfo> barrages = (List<BarrageInfo>) redisTemplate.opsForHash().get("barrage" + videoId, offset);
+
+        if (barrages == null) barrages = new ArrayList<>();
 
         barrages.add(barrageInfo);
 
-        redisTemplate.opsForHash().put("barrage" + videoId, date.toString(), barrages);
+        redisTemplate.opsForHash().put("barrage" + videoId, offset, barrages);
     }
 }

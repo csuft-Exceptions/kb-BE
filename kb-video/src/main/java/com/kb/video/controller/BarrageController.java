@@ -9,7 +9,6 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -24,14 +23,14 @@ public class BarrageController {
      * 以时间为单位分片获取
      *
      * @param videoId
-     * @param date
+     * @param offset
      * @return
      */
-    @GetMapping("/bar/{videoId}/{date}")
+    @GetMapping("/bar/{videoId}/{offset}")
     @ApiOperation("以时间为单位分片获取dm")
-    public BaseResponse getBarrageByTime(@PathVariable("videoId") Long videoId, @PathVariable("date") Date date) {
+    public BaseResponse getBarrageByTime(@PathVariable("videoId") Long videoId, @PathVariable("offset") int offset) {
 
-        List<BarrageInfo> barrages = barrageService.getBarrageByTime(videoId, date);
+        List<BarrageInfo> barrages = barrageService.getBarrageByTime(videoId, offset);
 
         return BaseResponse.success(barrages);
 
@@ -57,15 +56,14 @@ public class BarrageController {
      * 添加一条
      *
      * @param videoId
-     * @param date
      * @param barrageInfo
      * @return
      */
-    @PostMapping("/bar/{videoId}/{date}")
+    @PostMapping("/bar/{videoId}")
     @ApiOperation("添加一条dm")
-    public BaseResponse addOneBarrage(@PathVariable("videoId") Long videoId, @PathVariable("date") Date date, @RequestBody BarrageInfo barrageInfo) {
+    public BaseResponse addOneBarrage(@PathVariable("videoId") Long videoId,@RequestBody BarrageInfo barrageInfo) {
 
-        barrageService.addOneBarrage(videoId, date, barrageInfo);
+        barrageService.addOneBarrage(videoId, barrageInfo);
 
         return BaseResponse.success(null);
 
