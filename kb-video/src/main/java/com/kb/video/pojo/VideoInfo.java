@@ -45,6 +45,6 @@ public class VideoInfo {
 
     private String picUrl;
 
-    String Introduction;
+    private String Introduction;
 
 }

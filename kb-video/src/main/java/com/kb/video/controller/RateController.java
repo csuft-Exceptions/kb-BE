@@ -15,7 +15,7 @@ import javax.annotation.Resource;
  * @date 2022-07-24 - 18:17
  */
 @RestController
-//@Api("排行相关")
+@Api("排行相关")
 public class RateController {
 
     @Resource
@@ -23,12 +23,14 @@ public class RateController {
 
 
     @GetMapping("/top")
+    @ApiOperation("top10")
     public BaseResponse top() {
         redisTemplate.opsForZSet().reverseRange("topZSet", 1, 10);
         return null;
     }
 
     @GetMapping("/topCategory")
+    @ApiOperation("分来top10")
     public BaseResponse top(Integer category) {
         redisTemplate.opsForZSet().reverseRange("topZSet" + category, 1, 10);
         return null;

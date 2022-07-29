@@ -13,5 +13,6 @@ public class VideoDto {
 
     private int category;
 
+    private String Introduction;
 
 }

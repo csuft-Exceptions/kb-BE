@@ -51,23 +51,23 @@ public class VideoService {
         return videoDao.getVideoInfoById(id);
     }
 
-    public Long addVideoInfo(VideoDto videoDto) {
-        OSSUtil ossUtil = new OSSUtil();
-        List<OSSObjectSummary> urls = ossUtil.getUrl();
-        Set<String> set = urls.stream().map(x -> x.getKey()).collect(Collectors.toSet());
-        if (!set.contains(videoDto.getName())) {
-            throw new InfoException("添加失败");
-        }
-        String url = ossUtil.getUrl(videoDto.getName());
-        VideoInfo videoInfo = VideoInfo.builder()
-                .id(null)
-                .userId(videoDto.getUserId())
-                .createTime(new Date())
-                .updateTime(new Date())
-                .category(videoDto.getCategory())
-                .name(videoDto.getName())
-                .url(url)
-                .build();
+    public Long addVideoInfo(VideoInfo videoInfo) {
+//        OSSUtil ossUtil = new OSSUtil();
+//        List<OSSObjectSummary> urls = ossUtil.getUrl();
+//        Set<String> set = urls.stream().map(x -> x.getKey()).collect(Collectors.toSet());
+//        if (!set.contains(videoDto.getName())) {
+//            throw new InfoException("添加失败");
+//        }
+//        String url = ossUtil.getUrl(videoDto.getName());
+//        VideoInfo videoInfo = VideoInfo.builder()
+//                .id(null)
+//                .userId(videoDto.getUserId())
+//                .createTime(new Date())
+//                .updateTime(new Date())
+//                .category(videoDto.getCategory())
+//                .name(videoDto.getName())
+//                .url(url)
+//                .build();
         videoDao.addVideoInfo(videoInfo);
 
         return videoInfo.getId();

@@ -99,17 +99,17 @@ public class VideoController {
     /**
      * （视频添加成功后调用）添加视频
      *
-     * @param videoDto
+     * @param videoInfo
      * @return
      */
     @ApiOperation("添加视频")
     @PostMapping("/videoInfo")
-    public BaseResponse addVideoInfo(@RequestBody VideoDto videoDto) {
+    public BaseResponse addVideoInfo(@RequestBody VideoInfo videoInfo) {
 
-        Long id = videoService.addVideoInfo(videoDto);
+        Long id = videoService.addVideoInfo(videoInfo);
         redisTemplate.opsForSet().add("top", id.toString());
         // 过期时间为3天 实际为71小时
-        redisTemplate.opsForValue().set(id.toString(), String.valueOf(videoDto.getCategory()), 255600, TimeUnit.SECONDS);
+        redisTemplate.opsForValue().set(id.toString(), String.valueOf(videoInfo.getCategory()), 255600, TimeUnit.SECONDS);
         return BaseResponse.success(id);
     }
 
