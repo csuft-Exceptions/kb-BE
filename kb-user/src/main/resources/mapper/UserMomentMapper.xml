@@ -29,13 +29,13 @@
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="userId !=null and userId !=''">
-                #{user_id,jdbcType=VARCHAR},
+                #{userId,jdbcType=VARCHAR},
             </if>
             <if test="momentType !=null and momentType !=''">
-                #{moment_type,jdbcType=VARCHAR},
+                #{momentType,jdbcType=VARCHAR},
             </if>
             <if test="contentId !=null and contentId!='' ">
-                #{content_id,jdbcType=VARCHAR},
+                #{contentId,jdbcType=VARCHAR},
             </if>
             now()
         </trim>
@@ -43,4 +43,15 @@
             SELECT LAST_INSERT_ID()
         </selectKey>
     </insert>
+
+    <select id="detail" resultMap="BaseResultMap">
+        select
+            <include refid="Base_Column_List"/>
+        from
+            t_user_moments
+        where
+            id=#{count,jdbcType=BIGINT}
+        and
+            delete_state=0;
+    </select>
 </mapper>

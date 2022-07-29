@@ -16,7 +16,7 @@ import java.util.Map;
  */
 public class AssertUtil {
     public static void isTrue(boolean expression, String msg) {
-        if (!expression) {
+        if (expression) {
             throw new InfoException(msg);
         }
     }

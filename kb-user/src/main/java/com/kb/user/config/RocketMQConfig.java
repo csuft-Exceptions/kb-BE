@@ -21,6 +21,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -31,7 +32,7 @@ import java.util.List;
 @Configuration
 @Slf4j
 public class RocketMQConfig {
-    @Value("{rocketmq.name.server.address}")
+    @Value("${rocketmq.name.server.address}")
     private String nameSeverAddr;
 
     @Resource
@@ -40,12 +41,15 @@ public class RocketMQConfig {
     @Resource
     private UserFollowingMapper userFollowingMapper;
 
-    @Bean("momentProducer")
-    public DefaultMQProducer momentProducer(){
+    @Bean("momentsProducer")
+    public DefaultMQProducer momentsProducer(){
         DefaultMQProducer producer=new DefaultMQProducer("MomentsGroup");
         producer.setNamesrvAddr(nameSeverAddr);
+        producer.setSendMsgTimeout(60000);
+        producer.setVipChannelEnabled(false);
         try {
             producer.start();
+            log.info("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<启动成功{}<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<",nameSeverAddr);
         } catch (MQClientException e) {
             log.error("MomentsGroup消息队列启动失败",e);
             throw new InfoException("RockerMQ启动失败",e);
@@ -53,13 +57,14 @@ public class RocketMQConfig {
         return producer;
     }
 
-    @Bean("momentConsumer")
-    public DefaultMQPushConsumer momentConsumer(){
+    @Bean("momentsConsumer")
+    public DefaultMQPushConsumer momentsConsumer(){
         DefaultMQPushConsumer consumer=new DefaultMQPushConsumer("MomentsGroup");
         consumer.setNamesrvAddr(nameSeverAddr);
+        consumer.setVipChannelEnabled(false);
         // *代表订阅所有
         try {
-            consumer.subscribe("Topic-moments","*");
+            consumer.subscribe("Topic-Moments","*");
             // 监听者,注册并发的监听器,只有一条消息,所以只取第一个
             consumer.registerMessageListener((MessageListenerConcurrently) (list, consumeConcurrentlyContext) -> {
                 MessageExt msg=list.get(0);
@@ -82,6 +87,7 @@ public class RocketMQConfig {
                     }
                     subList.add(userMoment);
                     redisTemplate.opsForValue().set(key,JSONObject.toJSONString(subList));
+                    Collections.reverse(subList);
                 }
                 return ConsumeConcurrentlyStatus.CONSUME_SUCCESS;
             });

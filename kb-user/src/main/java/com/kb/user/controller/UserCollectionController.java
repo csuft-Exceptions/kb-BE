@@ -34,7 +34,7 @@ public class UserCollectionController {
     }
 
     /**
-     * todo 根据userid和groupId查询list建个联合索引，userid查询粉丝列表
+     *
      * 分页查询
      * @param userCollectionParam
      * @return
@@ -42,5 +42,15 @@ public class UserCollectionController {
     @GetMapping("collect")
     public BaseResponse list(UserCollectionParam userCollectionParam){
         return userCollectionService.list(userCollectionParam);
+    }
+
+    @GetMapping("videoCollectCount")
+    public BaseResponse count(Long contentId){
+        return userCollectionService.count(contentId);
+    }
+
+    @GetMapping("userCollectCount")
+    public BaseResponse userCollectCount(Long userId){
+        return userCollectionService.userCollectCount(userId);
     }
 }

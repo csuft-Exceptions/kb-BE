@@ -71,4 +71,22 @@
             id
         desc
     </select>
+
+    <select id="fansCount" resultType="java.lang.Long">
+        select
+            count(1)
+        from
+            t_user_following
+        where
+            following_id=#{followingId,jdbcType=BIGINT}
+    </select>
+
+    <select id="followingCount" resultType="java.lang.Long">
+        select
+                count(1)
+        from
+                t_user_following
+        where
+                user_id=#{userId,jdbcType=BIGINT}
+    </select>
 </mapper>

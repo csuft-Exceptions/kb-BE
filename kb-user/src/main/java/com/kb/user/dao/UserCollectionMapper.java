@@ -33,4 +33,18 @@ public interface UserCollectionMapper {
      * @return
      */
     List<UserCollection> list(UserCollectionParam userCollectionParam);
+
+    /**
+     * 数量
+     * @param videoId
+     * @return
+     */
+    Long count(Long contentId);
+
+    /**
+     * 用户数量
+     * @param userId
+     * @return
+     */
+    Long userCollectCount(Long userId);
 }

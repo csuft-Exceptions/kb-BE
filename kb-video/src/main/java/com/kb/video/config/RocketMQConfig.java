@@ -33,7 +33,7 @@ import java.util.Set;
 @Configuration
 @Slf4j
 public class RocketMQConfig {
-    @Value("{rocketmq.name.server.address}")
+    @Value("${rocketmq.name.server.address}")
     private String nameSeverAddr;
 
     @Resource
@@ -52,8 +52,9 @@ public class RocketMQConfig {
         producer.setNamesrvAddr(nameSeverAddr);
         try {
             producer.start();
+            log.info("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<启动成功{}<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<",nameSeverAddr);
             // 启动时发送第一条消息
-            Message msg2=new Message("Topic-top",null);
+            Message msg2=new Message("Topic-top",new byte[1]);
             RocketMQUtil.asyncSendMsg(producer,msg2,true);
         } catch (MQClientException e) {
             log.error("TopGroup消息队列启动失败",e);
@@ -92,7 +93,7 @@ public class RocketMQConfig {
                         redisTemplate.opsForSet().remove("top", s);
                     }
                 }
-                Message msg2=new Message("Topic-top",null);
+                Message msg2=new Message("Topic-top",new byte[1]);
                 DefaultMQProducer producer=(DefaultMQProducer)applicationContext.getBean("topProducer");
                 RocketMQUtil.asyncSendMsg(producer,msg2,true);
                 return ConsumeConcurrentlyStatus.CONSUME_SUCCESS;
@@ -108,7 +109,7 @@ public class RocketMQConfig {
     private double getScore(VideoInfo videoInfo) {
         return videoInfo.getBarrages()*10+(Long) redisTemplate.opsForHash().get("like",videoInfo.getId())*5+
                 redisTemplate.opsForHyperLogLog().size("hl" + videoInfo.getId())*20+
-                TimeUtil.between(TimeUtil.getDateTime(videoInfo.getCreateTime()),
-                        TimeUtil.getDateTime(new Date()), ChronoUnit.HOURS)*15;
+                (71-TimeUtil.between(TimeUtil.getDateTime(videoInfo.getCreateTime()),
+                        TimeUtil.getDateTime(new Date()), ChronoUnit.HOURS))*15;
     }
 }

@@ -52,4 +52,16 @@ public class UserFollowingServiceImpl implements UserFollowingService {
         List<UserFollowing> fans=userFollowingMapper.fans(followingId);
         return BaseResponse.success(fans,fans.size());
     }
+
+    @Override
+    public BaseResponse fansCount(Long followingId) {
+        Long count=userFollowingMapper.fansCount(followingId);
+        return BaseResponse.success(count);
+    }
+
+    @Override
+    public BaseResponse followingCount(Long userId) {
+        Long count=userFollowingMapper.followingCount(userId);
+        return BaseResponse.success(count);
+    }
 }

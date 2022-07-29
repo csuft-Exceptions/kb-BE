@@ -15,5 +15,12 @@ public interface UserMomentMapper {
      * @param userMoment
      * @return
      */
-    Integer addUserMoments(UserMoment userMoment);
+    Long addUserMoments(UserMoment userMoment);
+
+    /**
+     * 详情
+     * @param count
+     * @return
+     */
+    UserMoment detail(Long count);
 }
