@@ -67,7 +67,7 @@ public class VideoController {
     @GetMapping("/videoInfo")
     public BaseResponse getAllVideoInfo() {
         List<VideoInfo> videoInfoList = videoService.getAllVideoInfo();
-        return BaseResponse.success(videoInfoList);
+        return BaseResponse.success(videoInfoList, videoInfoList.size());
     }
 
     /**
@@ -80,18 +80,18 @@ public class VideoController {
     @GetMapping("/userVideo/{userId}")
     public BaseResponse getVideoInfoRichByUserId(@PathVariable("userId") Long userId) {
         List<VideoInfo> videoInfoList = videoService.getVideoInfoByUserId(userId);
-        return BaseResponse.success(videoInfoList);
+        return BaseResponse.success(videoInfoList, videoInfoList.size());
     }
 
     /**
-     * 根据id查询视频
+     * 根据视频id查询视频
      *
      * @param id
      * @return
      */
     @ApiOperation("根据id查询视频")
-    @GetMapping("/videoInfo/{id}")
-    public BaseResponse getVideoInfoById(@PathVariable("id") Long id) {
+    @GetMapping("/videoInfo/{videoId}")
+    public BaseResponse getVideoInfoById(@PathVariable("videoId") Long id) {
         VideoInfo videoInfo = videoService.getVideoInfoById(id);
         return BaseResponse.success(videoInfo);
     }

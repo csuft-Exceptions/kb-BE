@@ -28,7 +28,7 @@ public class VideoInfo implements Serializable {
 
     private Integer category;//分类
 
-    private Long duration;
+    private String duration;//时长
 
     private Date createTime;
 
