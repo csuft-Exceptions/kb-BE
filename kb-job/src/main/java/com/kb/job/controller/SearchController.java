@@ -16,7 +16,7 @@
 //
 //     @Resource
 //     private ElasticSearchService elasticSearchService;
-//     @GetMapping("/es-videos")
+//     @GetMapping("/es")
 //     public BaseResponse getEsVideos(@RequestParam String keyword){
 //         return BaseResponse.success(elasticSearchService.getVideo(keyword));
 //     }

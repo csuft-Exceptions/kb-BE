@@ -33,7 +33,7 @@ import java.util.Set;
 @Configuration
 @Slf4j
 public class RocketMQConfig {
-    @Value("{rocketmq.name.server.address}")
+    @Value("${rocketmq.name.server.address}")
     private String nameSeverAddr;
 
     @Resource
@@ -52,6 +52,7 @@ public class RocketMQConfig {
         producer.setNamesrvAddr(nameSeverAddr);
         try {
             producer.start();
+            log.info("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<启动成功{}<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<",nameSeverAddr);
             // 启动时发送第一条消息
             Message msg2=new Message("Topic-top",new byte[1]);
             RocketMQUtil.asyncSendMsg(producer,msg2,true);
