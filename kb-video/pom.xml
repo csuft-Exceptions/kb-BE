@@ -14,12 +14,6 @@
     </parent>
 
     <dependencies>
-        <!--阿里云oss-->
-        <dependency>
-            <groupId>com.aliyun.oss</groupId>
-            <artifactId>aliyun-sdk-oss</artifactId>
-            <version>3.5.0</version>
-        </dependency>
         <!--图片处理-->
         <dependency>
             <groupId>net.coobird</groupId>

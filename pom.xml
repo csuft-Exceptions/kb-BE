@@ -14,7 +14,8 @@
         <module>kb-video</module>
         <module>kb-common</module>
         <module>kb-oauth</module>
-        <module>kb-job</module>
+        <module>kb-file</module>
+        <module>kb-search</module>
         <module>kb-user</module>
     </modules>
     <groupId>com.cloud</groupId>
@@ -35,11 +36,16 @@
     </properties>
 
     <dependencies>
-<!--        common-->
+        <!--common-->
         <dependency>
             <groupId>com.kb</groupId>
             <artifactId>kb-common</artifactId>
             <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.aliyun.oss</groupId>
+            <artifactId>aliyun-sdk-oss</artifactId>
+            <version>3.5.0</version>
         </dependency>
         <dependency>
             <groupId>org.apache.rocketmq</groupId>
@@ -110,11 +116,6 @@
             <groupId>com.github.pagehelper</groupId>
             <artifactId>pagehelper-spring-boot-starter</artifactId>
             <version>1.3.0</version>
-        </dependency>
-        <dependency>
-            <groupId>com.aliyun.oss</groupId>
-            <artifactId>aliyun-sdk-oss</artifactId>
-            <version>3.5.0</version>
         </dependency>
         <!--nacos discovery-->
         <dependency>
