@@ -29,35 +29,6 @@ public class VideoController {
     RedisTemplate<String,String> redisTemplate;
 
 
-//    /**
-//     * 获取指定key的url
-//     *
-//     * @param key
-//     * @return
-//     */
-//    @GetMapping("/url/{key}")
-//    public BaseResponse getUrl(@PathVariable("key") String key) {
-//        OSSUtil ossUtil = new OSSUtil();
-//        System.out.println(key);
-//        return BaseResponse.success(ossUtil.getUrl(key));
-//    }
-
-//    /**
-//     * 列举bucketname下所有的key(name)
-//     *
-//     * @return
-//     */
-//    @GetMapping("/key")
-//    public BaseResponse getKey() {
-//        OSSUtil ossUtil = new OSSUtil();
-//        List<OSSObjectSummary> sums = ossUtil.getUrl();
-//        List<String> collect = sums.stream().map(item -> item.getKey()).collect(Collectors.toList());
-//        for (OSSObjectSummary s : sums) {
-//            System.out.println("\t" + s.getKey());
-//        }
-//        return BaseResponse.success(collect, collect.size());
-//    }
-
     /**
      * 查询所有视频信息
      *
