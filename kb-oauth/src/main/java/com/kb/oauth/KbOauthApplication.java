@@ -1,5 +1,6 @@
 package com.kb.oauth;
 
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.client.RestTemplateBuilder;
@@ -11,7 +12,8 @@ import org.springframework.web.client.RestTemplate;
 
 @SpringBootApplication(scanBasePackages = {"com.kb.*"},scanBasePackageClasses = {KbOauthApplication.class})
 @EnableDiscoveryClient
-@EnableFeignClients(value = "com.kb.oauth.dao")
+@EnableFeignClients(value = "com.kb.oauth.dao.feign")
+@MapperScan(value = "com.kb.oauth.dao")
 public class KbOauthApplication {
 
     public static void main(String[] args) {

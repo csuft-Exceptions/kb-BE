@@ -12,6 +12,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 public class JiamiTest {
     @Test
     void test(){
-        System.out.println(new BCryptPasswordEncoder().encode("123456"));
+        System.out.println(new BCryptPasswordEncoder().encode("kaibai"));
     }
 }
