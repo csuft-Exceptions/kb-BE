@@ -16,6 +16,12 @@
 <!--    <packaging>war</packaging>-->
 
     <dependencies>
+        <!--common-->
+        <dependency>
+            <groupId>com.kb</groupId>
+            <artifactId>kb-common</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
         <!--GateWay 网关-->
         <dependency>
             <groupId>org.springframework.cloud</groupId>

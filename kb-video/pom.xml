@@ -14,10 +14,11 @@
     </parent>
 
     <dependencies>
-        <!--redis 连接-->
+        <!--common-->
         <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-pool2</artifactId>
+            <groupId>com.kb</groupId>
+            <artifactId>kb-common</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
         </dependency>
         <!--图片处理-->
         <dependency>
