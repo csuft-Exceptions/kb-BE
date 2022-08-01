@@ -1,6 +1,5 @@
 package com.kb.video.pojo;
 
-import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.data.redis.core.ZSetOperations;

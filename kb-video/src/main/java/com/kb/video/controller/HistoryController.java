@@ -35,8 +35,16 @@ public class HistoryController {
 
         Map<Long, Long> history = historyService.getHistory(userId);
 
-        return BaseResponse.success(history);
+        return BaseResponse.success(history,history.size());
     }
 
+    @DeleteMapping("/history")
+    @ApiOperation("delete history")
+    public BaseResponse removeOneHistory(@RequestBody HistoryDto historyDto){
+
+        historyService.removeOneHistory(historyDto.getUserId(),historyDto.getVideoId());
+
+        return BaseResponse.success(null);
+    }
 
 }
