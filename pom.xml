@@ -35,7 +35,7 @@
     </properties>
 
     <dependencies>
-<!--        common-->
+        <!--        common-->
         <dependency>
             <groupId>com.kb</groupId>
             <artifactId>kb-common</artifactId>
@@ -147,6 +147,11 @@
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-openfeign</artifactId>
+        </dependency>
+        <!--redis 连接-->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-pool2</artifactId>
         </dependency>
 
         <dependency>
