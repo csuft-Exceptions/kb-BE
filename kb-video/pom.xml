@@ -14,11 +14,10 @@
     </parent>
 
     <dependencies>
-        <!--阿里云oss-->
+        <!--redis 连接-->
         <dependency>
-            <groupId>com.aliyun.oss</groupId>
-            <artifactId>aliyun-sdk-oss</artifactId>
-            <version>3.5.0</version>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-pool2</artifactId>
         </dependency>
         <!--图片处理-->
         <dependency>
