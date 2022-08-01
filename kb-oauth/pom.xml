@@ -15,6 +15,12 @@
     </parent>
 
     <dependencies>
+        <!--common-->
+        <dependency>
+            <groupId>com.kb</groupId>
+            <artifactId>kb-common</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-oauth2</artifactId>
