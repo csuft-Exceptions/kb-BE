@@ -6,12 +6,16 @@ import io.swagger.annotations.ApiModel;
 import lombok.Builder;
 import lombok.Data;
 
+import java.io.Serializable;
 import java.util.Date;
 
+/**
+ * 播放页面
+ */
 @Data
 @ApiModel
 @Builder
-public class VideoInfo {
+public class VideoInfo implements Serializable {
 
     @TableId(value = "id", type = IdType.AUTO)
     private Long id;
@@ -24,7 +28,7 @@ public class VideoInfo {
 
     private Integer category;//分类
 
-    private Date expirationTime;
+    private String duration;//时长
 
     private Date createTime;
 
@@ -40,6 +44,8 @@ public class VideoInfo {
 
     private Long barrageId;
 
-    private Long picId;
+    private String picUrl;
+
+    private String Introduction;
 
 }

@@ -22,7 +22,7 @@ public class LikeController {
 
         likeService.increaseLike(videoId);
 
-        return BaseResponse.success(null);
+        return BaseResponse.success(likeService.getLikes(videoId));
     }
 
     @PostMapping("/likeDe/{videoId}")
@@ -31,7 +31,7 @@ public class LikeController {
 
         likeService.decreaseLike(videoId);
 
-        return BaseResponse.success(null);
+        return BaseResponse.success(likeService.getLikes(videoId));
     }
 
     @GetMapping("/like/{videoId}")
@@ -39,6 +39,8 @@ public class LikeController {
     public BaseResponse getLikes(@PathVariable("videoId") Long videoId) {
 
         Long count = likeService.getLikes(videoId);
+
+        if(count == null)count = 0L;
 
         return BaseResponse.success(count);
     }

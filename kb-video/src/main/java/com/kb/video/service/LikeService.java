@@ -13,7 +13,7 @@ import java.util.Map;
 public class LikeService {
 
     @Resource
-    RedisTemplate<String, Map<Long, Long>> redisTemplate;
+    RedisTemplate<String, Map<Integer, Integer>> redisTemplate;
 
 
     public void increaseLike(Long videoId) {
@@ -26,7 +26,7 @@ public class LikeService {
 
     public Long getLikes(Long videoId) {
 
-        return (Long) redisTemplate.opsForHash().get("like", videoId);
+        return Long.valueOf(redisTemplate.opsForHash().get("like", videoId).toString());
 
     }
 }
