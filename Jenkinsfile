@@ -2,6 +2,9 @@ node {
     stage('拉取代码'){
         checkout([$class: 'GitSCM', branches: [[name: 'main']], extensions: [], userRemoteConfigs: [[url: 'https://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@github.com/csuft-Exceptions/kb-BE.git']]])
     }
+    stage('编译,安装kb工程'){
+            sh "mvn  clean install -Dmaven.test.skip=true"
+    }
     stage('编译,安装kb-common工程'){
         sh "mvn -f kb-common clean install -Dmaven.test.skip=true"
     }
