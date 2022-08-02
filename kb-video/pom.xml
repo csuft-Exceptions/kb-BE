@@ -4,13 +4,13 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.kb</groupId>
     <artifactId>kb-video</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0-SNAPSHOT</version>
     <name>kb-video</name>
     <description>kb-video</description>
     <parent>
         <artifactId>kb</artifactId>
         <groupId>com.cloud</groupId>
-        <version>0.0.1-SNAPSHOT</version>
+        <version>1.0-SNAPSHOT</version>
     </parent>
 
     <dependencies>
@@ -18,7 +18,7 @@
         <dependency>
             <groupId>com.kb</groupId>
             <artifactId>kb-common</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
+            <version>1.0-SNAPSHOT</version>
         </dependency>
         <!--图片处理-->
         <dependency>
