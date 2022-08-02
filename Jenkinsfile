@@ -3,12 +3,12 @@ node {
         checkout([$class: 'GitSCM', branches: [[name: 'main']], extensions: [], userRemoteConfigs: [[url: 'https://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@github.com/csuft-Exceptions/kb-BE.git']]])
     }
     stage('编译,安装kb-common工程'){
-        sh "mvn -f kb-common clean install"
+        sh "mvn -f kb-common clean install -Dmaven.test.skip=true"
     }
 
     stage('编译,安装kb-file工程'){
             echo "Building kb-file"
-            sh "mvn -f kb-file clean install"
+            sh "mvn -f kb-file clean install  -Dmaven.test.skip=true"
             try{
                 echo "第一次启动容器kb-file"
                 sh "docker run  --name=kb-file -d -p 9009:9009 kb-file-1.0-SNAPSHOT"
@@ -26,7 +26,7 @@ node {
 
     stage('编译,安装kb-gateway 工程'){
             echo "Building kb-gateway"
-            sh "mvn -f kb-gateway clean install"
+            sh "mvn -f kb-gateway clean install  -Dmaven.test.skip=true"
             try{
                 echo "第一次启动容器kb-gateway"
                 sh "docker run  --name=kb-gateway -d -p 9000:9000 kb-gateway-1.0-SNAPSHOT"
@@ -44,7 +44,7 @@ node {
 
     stage('编译,安装kb-video 工程'){
             echo "Building kb-video"
-            sh "mvn -f kb-video clean install"
+            sh "mvn -f kb-video clean install  -Dmaven.test.skip=true"
             try{
                 echo "第一次启动容器kb-video"
                 sh "docker run  --name=kb-video -d -p 9010:9010 kb-video-1.0-SNAPSHOT"
@@ -61,7 +61,7 @@ node {
     }
     stage('编译,安装kb-user 工程'){
             echo "Building kb-user"
-            sh "mvn -f kb-user clean install"
+            sh "mvn -f kb-user clean install  -Dmaven.test.skip=true"
             try{
                 echo "第一次启动容器kb-user"
                 sh "docker run  --name=kb-user -d -p 9001:9001 kb-user-1.0-SNAPSHOT"
@@ -78,7 +78,7 @@ node {
     }
     stage('编译,安装kb-search 工程'){
             echo "Building kb-search"
-            sh "mvn -f kb-search clean install"
+            sh "mvn -f kb-search clean install  -Dmaven.test.skip=true"
             try{
                 echo "第一次启动容器kb-search"
                 sh "docker run  --name=kb-search -d -p 9008:9008 kb-search-1.0-SNAPSHOT"
@@ -95,7 +95,7 @@ node {
     }
     stage('编译,安装kb-oauth 工程'){
             echo "Building kb-oauth"
-            sh "mvn -f kb-oauth clean install"
+            sh "mvn -f kb-oauth clean install  -Dmaven.test.skip=true"
             try{
                 echo "第一次启动容器kb-oauth"
                 sh "docker run  --name=kb-oauth -d -p 9002:9002 kb-oauth-1.0-SNAPSHOT"
