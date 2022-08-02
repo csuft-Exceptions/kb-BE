@@ -33,9 +33,9 @@ public class HistoryController {
     @ApiOperation("get history")
     public BaseResponse getHistory(@PathVariable("userId") Long userId){
 
-        Map<Long, Long> history = historyService.getHistory(userId);
+        Map<String, Long> history = historyService.getHistory(userId);
 
-        return BaseResponse.success(history,history.size());
+        return BaseResponse.success(history);
     }
 
     @DeleteMapping("/history")
