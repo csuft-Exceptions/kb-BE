@@ -46,6 +46,7 @@
                 </executions>
                 <configuration>
                     <classifier>exec</classifier>
+                    <mainClass>com.kb.common.KbCommonApplication</mainClass>
                     <includeSystemScope>true</includeSystemScope>
                 </configuration>
             </plugin>
