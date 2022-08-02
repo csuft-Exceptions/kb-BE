@@ -14,14 +14,14 @@ node {
             sh "mvn -f kb-file clean install  -Dmaven.test.skip=true"
             try{
                 echo "第一次启动容器kb-file"
-                sh "docker run  --name=kb-file -d -p 9009:9009 kb-file-1.0:SNAPSHOT"
+                sh "docker run  --name=kb-file -d -p 9009:9009 kb-file:1.0-SNAPSHOT"
             }catch(Throwable e){
                 echo "容器kb-file已经启动,现在终止容器运行"
                 sh "docker stop kb-file"
                 echo "移除容器kb-file"
                 sh "docker rm kb-file"
                 echo "重新启动容器kb-file"
-                sh "docker run  --name=kb-file -d -p 9009:9009 kb-file-1.0:SNAPSHOT"
+                sh "docker run  --name=kb-file -d -p 9009:9009 kb-file:1.0-SNAPSHOT"
                 echo "清理旧镜像(状态为none的镜像)"
                 sh "docker image prune -f"
             }
