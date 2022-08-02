@@ -4,14 +4,15 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.kb</groupId>
     <artifactId>kb-oauth</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0-SNAPSHOT</version>
     <name>kb-oauth</name>
+    <packaging>jar</packaging>
     <description>Demo project for Spring Boot</description>
 
     <parent>
         <artifactId>kb</artifactId>
         <groupId>com.cloud</groupId>
-        <version>0.0.1-SNAPSHOT</version>
+        <version>1.0-SNAPSHOT</version>
     </parent>
 
     <dependencies>
@@ -19,7 +20,7 @@
         <dependency>
             <groupId>com.kb</groupId>
             <artifactId>kb-common</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
+            <version>1.0-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.cloud</groupId>

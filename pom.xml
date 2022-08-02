@@ -20,7 +20,7 @@
     </modules>
     <groupId>com.cloud</groupId>
     <artifactId>kb</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0-SNAPSHOT</version>
     <name>kb</name>
     <description>kb</description>
     <packaging>pom</packaging>
