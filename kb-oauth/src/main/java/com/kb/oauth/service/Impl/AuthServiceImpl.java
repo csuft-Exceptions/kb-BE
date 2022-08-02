@@ -133,7 +133,7 @@ public class AuthServiceImpl implements AuthService {
         //header信息，包括了http basic 认证信息(请求头)
         httpHeaders.setContentType(MediaType.APPLICATION_JSON);
         //进行base64编码，并将编码后的认证数据放到文件中
-        String httpBasic = httpBasic("kaibai","kaibai");
+        String httpBasic = httpBasic(clientId,clientSecret);
         httpHeaders.setBasicAuth(httpBasic);
         //MultiValueMap与hashmap区别？
         MultiValueMap<String,String> paramsMap = new LinkedMultiValueMap<>();

@@ -4,6 +4,8 @@ import com.kb.common.base.BaseResponse;
 import com.kb.common.utils.AssertUtil;
 import com.kb.video.dao.mapper.VideoMapper;
 import com.kb.video.pojo.VideoInfo;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,7 +22,7 @@ import java.util.Set;
  * @date 2022-07-24 - 18:17
  */
 @RestController
-//@Api("排行相关")
+@Api("排行相关")
 @Slf4j
 public class RateController {
 
@@ -30,6 +32,7 @@ public class RateController {
     @Resource
     private VideoMapper videoMapper;
     @GetMapping("/top")
+    @ApiOperation("top10")
     public BaseResponse top() {
         Set<String> set=redisTemplate.opsForZSet().reverseRange("topZSet", 1, 10);
         List<VideoInfo> list=new ArrayList<>();
@@ -43,6 +46,7 @@ public class RateController {
     }
 
     @GetMapping("/topCategory")
+    @ApiOperation("分类top10")
     public BaseResponse top(Integer category) {
         redisTemplate.opsForZSet().reverseRange("topZSet" + category, 1, 10);
         return null;
