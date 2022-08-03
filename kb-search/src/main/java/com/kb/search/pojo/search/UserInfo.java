@@ -22,7 +22,6 @@ public class UserInfo {
     /**
      * 用户编号,唯一
      */
-    @Field(type = FieldType.Long)
     private Long userId;
 
     /**

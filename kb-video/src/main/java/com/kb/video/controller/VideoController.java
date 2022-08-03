@@ -2,7 +2,6 @@ package com.kb.video.controller;
 
 import com.kb.common.base.BaseResponse;
 import com.kb.video.pojo.VideoInfo;
-import com.kb.video.pojo.dto.VideoDto;
 import com.kb.video.service.VideoService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -27,7 +26,6 @@ public class VideoController {
 
     @Resource
     RedisTemplate<String,String> redisTemplate;
-
 
     /**
      * 查询所有视频信息
