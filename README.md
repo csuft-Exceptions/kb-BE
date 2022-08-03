@@ -1,4 +1,6 @@
-<img src="https://picmwz.oss-cn-hangzhou.aliyuncs.com/logo%E9%85%8D%E8%89%B2%E5%9B%BE.png" alt="KaiBai" style="zoom:30%;" />
+<div align=center>
+    <img src="https://picmwz.oss-cn-hangzhou.aliyuncs.com/logo%E9%85%8D%E8%89%B2%E5%9B%BE.png" width="275"  alt="KaiBai"/>
+</div>
 
 #### 项目介绍
 
