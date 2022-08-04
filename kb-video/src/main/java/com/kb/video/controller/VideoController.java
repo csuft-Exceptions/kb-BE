@@ -1,6 +1,8 @@
 package com.kb.video.controller;
 
 import com.kb.common.base.BaseResponse;
+import com.kb.search.pojo.search.Video;
+import com.kb.video.feign.SearchFeign;
 import com.kb.video.pojo.VideoInfo;
 import com.kb.video.service.VideoService;
 import io.swagger.annotations.Api;
@@ -26,6 +28,7 @@ public class VideoController {
 
     @Resource
     RedisTemplate<String,String> redisTemplate;
+
 
     /**
      * 查询所有视频信息
