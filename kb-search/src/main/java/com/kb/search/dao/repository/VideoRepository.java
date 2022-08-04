@@ -14,5 +14,5 @@ public interface VideoRepository extends ElasticsearchRepository<Video,Long> {
      * @param keyword
      * @return
      */
-    Video findByTitleLike(String keyword);
+    Video findByNameLike(String keyword);
 }
