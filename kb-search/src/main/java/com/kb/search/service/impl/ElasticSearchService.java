@@ -55,12 +55,12 @@ public class ElasticSearchService {
         // 分页
         sourceBuilder.from(pageNo-1);
         sourceBuilder.size(pageSize);
-        MultiMatchQueryBuilder matchQueryBuilder= QueryBuilders.multiMatchQuery(keyword,"nickname","videoName","description");
+        MultiMatchQueryBuilder matchQueryBuilder= QueryBuilders.multiMatchQuery(keyword,"nickname","name","Introduction");
         sourceBuilder.query(matchQueryBuilder);
         searchRequest.source(sourceBuilder);
         sourceBuilder.timeout(new TimeValue(60, TimeUnit.SECONDS));
         // 高亮显示
-        String[] array={"nickname","videoName","description"};
+        String[] array={"nickname","name","Introduction"};
         HighlightBuilder highlightBuilder=new HighlightBuilder();
         for(String key:array){
             highlightBuilder.fields().add(new HighlightBuilder.Field(key));
@@ -92,6 +92,7 @@ public class ElasticSearchService {
                     sourceMap.put(key,str);
                 }
             }
+            mapList.add(sourceMap);
         }
         return mapList;
     }
@@ -104,7 +105,7 @@ public class ElasticSearchService {
     }
 
     public  Video getVideo(String keyword){
-        return videoRepository.findByTitleLike(keyword);
+        return videoRepository.findByNameLike(keyword);
     }
 
     public  void deleteAllVideos(){

@@ -4,9 +4,7 @@ import com.kb.common.base.BaseResponse;
 import com.kb.search.pojo.search.UserInfo;
 import com.kb.search.pojo.search.Video;
 import com.kb.search.service.impl.ElasticSearchService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 
@@ -15,6 +13,7 @@ import javax.annotation.Resource;
  * @version 1.0
  * @date 2022-07-24 - 17:27
  */
+@RestController
 public class SearchController {
 
     @Resource
@@ -31,13 +30,13 @@ public class SearchController {
     }
 
     @PostMapping("/es-addVideo")
-    public BaseResponse addVideo(Video video){
+    public BaseResponse addVideo(@RequestBody Video video){
         elasticSearchService.addVideo(video);
         return BaseResponse.success("es-video 添加成功");
     }
 
     @PostMapping("/es-addUserInfo")
-    public BaseResponse addUserInfo(UserInfo userInfo){
+    public BaseResponse addUserInfo(@RequestBody UserInfo userInfo){
         elasticSearchService.addUserInfo(userInfo);
         return BaseResponse.success("es-userInfo 添加成功");
     }
