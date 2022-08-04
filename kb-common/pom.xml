@@ -36,19 +36,19 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <version>2.3.7.RELEASE</version>
-                <configuration>
-                    <classifier>exec</classifier>
-                    <mainClass>com.kb.common.KbCommonApplication</mainClass>
-                </configuration>
+                <!--加入下面两项配置-->
                 <executions>
                     <execution>
-                        <id>repackage</id>
                         <goals>
                             <goal>repackage</goal>
                         </goals>
                     </execution>
                 </executions>
+                <configuration>
+                    <classifier>exec</classifier>
+                    <mainClass>com.kb.common.KbCommonApplication</mainClass>
+                    <includeSystemScope>true</includeSystemScope>
+                </configuration>
             </plugin>
         </plugins>
     </build>
