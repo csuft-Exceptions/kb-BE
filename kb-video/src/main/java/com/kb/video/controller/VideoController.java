@@ -3,7 +3,6 @@ package com.kb.video.controller;
 import com.kb.common.base.BaseResponse;
 import com.kb.video.feign.SearchFeign;
 import com.kb.video.pojo.VideoInfo;
-import com.kb.video.pojo.dto.VideoDto;
 import com.kb.video.service.VideoService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

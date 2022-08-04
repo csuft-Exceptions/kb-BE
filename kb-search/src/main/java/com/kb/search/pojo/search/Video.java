@@ -1,42 +1,35 @@
 package com.kb.search.pojo.search;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.elasticsearch.annotations.DateFormat;
 import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.data.elasticsearch.annotations.Field;
 import org.springframework.data.elasticsearch.annotations.FieldType;
 
-import java.io.Serializable;
 import java.util.Date;
 
-/**
- * @author mawz
- * @version 1.0
- * @date 2022-07-24 - 17:28
- */
- @Document(indexName = "videos")
-public class Video implements Serializable {
+@Document(indexName = "videos")
+public class Video{
 
     @Id
     private Long id;
+
     @Field(type = FieldType.Long)
     private Long userId;
 
-     @Field(type = FieldType.Text)
+    @Field(type = FieldType.Text)
     private String name;
 
     private String url;
 
     private Integer category;
 
-    private Date expirationTime;
+    private String duration;
 
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
-    @Field(type = FieldType.Date)
+    @Field(type = FieldType.Date,format = DateFormat.basic_date_time)
     private Date createTime;
 
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
-    @Field(type = FieldType.Date)
+    @Field(type = FieldType.Date,format = DateFormat.basic_date_time)
     private Date updateTime;
 
     private Integer deleteState;
@@ -50,6 +43,7 @@ public class Video implements Serializable {
     private Long barrageId;
 
     private String picUrl;
+
     @Field(type = FieldType.Text)
     private String Introduction;
 
@@ -93,12 +87,12 @@ public class Video implements Serializable {
         this.category = category;
     }
 
-    public Date getExpirationTime() {
-        return expirationTime;
+    public String getDuration() {
+        return duration;
     }
 
-    public void setExpirationTime(Date expirationTime) {
-        this.expirationTime = expirationTime;
+    public void setDuration(String duration) {
+        this.duration = duration;
     }
 
     public Date getCreateTime() {
