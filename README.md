@@ -4,17 +4,17 @@
 
 #### 项目介绍
 
-KaiBai 是一个基于 Spring Cloud + React 开发的弹幕视频网站，出于兴趣和学习的目的开发了此项目，后续仍会更新。
+KaiBai 是一个基于 Spring Cloud + VUE 开发的弹幕视频网站，出于兴趣和学习的目的开发了此项目，后续仍会更新。
 
 - 后端 RESTful 风格的 API 设计。
-- 支持视频投稿，播放，发送弹幕，点赞收藏，转发，评论等
-- 支持关注用户，收藏视频，获取关注动态等
-- 支持视频排行功能，对播放量进行统计
-- 基于 JWT + Redis 实现登录鉴权及身份认证。
-- 基于 RBAC 实现的权限校验
-- 基于 ElaticSearch + kibana 实现的全局搜索
-- 基于 Jenkins + Docker 实现的自动化部署
+- 支持视频投稿，播放，发送弹幕，点赞收藏，转发，评论，以及视频排行等。
+- 支持关注用户，获取关注动态等。
+- 基于 JWT + Redis 实现身份认证,并支持 GitHub 登录。
+- 基于 RBAC 实现的权限控制
+- 基于 ElaticSearch 实现的全局搜索
+- 基于 Jenkins + Docker + GitHub 实现的自动化部署
 
+[KaiBai前端](https://github.com/csuft-Exceptions/kb-FE) (暂未完工)
 #### 项目结构
 
 ```
@@ -37,6 +37,7 @@ kb -- 父工程
 | Nacos                | 注册中心和配置中心        |
 | Sentinel             | 限流/熔断/降级            |
 | Spring Cloud Gateway | 微服务网关                |
+| Spring Cloud Oauth   | 微服务鉴权         |
 | MyBatis              | 持久层 ORM 框架           |
 | PageHelper           | MyBatis 分页插件          |
 | JJWT                 | JWT 登录支持              |
@@ -50,6 +51,6 @@ kb -- 父工程
 | Jenkins              | 持续集成工具              |
 | Docker               | 应用容器引擎              |
 | Jave                 | 视频处理工具              |
+| Nginx                | 反向代理web服务器         |
 
-
-
+ 
