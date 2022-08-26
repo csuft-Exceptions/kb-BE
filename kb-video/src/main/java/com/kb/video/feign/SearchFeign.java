@@ -2,7 +2,7 @@ package com.kb.video.feign;
 
 
 import com.kb.common.base.BaseResponse;
-import com.kb.search.pojo.search.Video;
+import com.kb.video.feign.feignDto.Video;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;
 
