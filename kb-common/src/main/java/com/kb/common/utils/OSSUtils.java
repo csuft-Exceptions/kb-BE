@@ -33,12 +33,23 @@ import java.util.UUID;
 public class OSSUtils {
 
 
+    private static volatile OSSClient ossClient;
     /**
-     * 获取对象
+     * 获取对象(单例)
+     * 如果排对怎么办?根据用户id做标识
      * @return ossClient
      */
     public static OSSClient getOSSClient(String endpoint,String accessKeyId,String accessKeySecret){
-        return new OSSClient(endpoint, accessKeyId, accessKeySecret);
+        OSSClient temp=null;
+        if(ossClient==null){
+            synchronized (OSSUtils.class){
+                if (ossClient==null){
+                    temp=new OSSClient(endpoint, accessKeyId, accessKeySecret);
+                    ossClient=temp;
+                }
+            }
+        }
+        return ossClient;
     }
 
     /**
