@@ -1,9 +1,7 @@
 package com.kb.common.utils;
 
 import com.aliyun.oss.OSSClient;
-import com.aliyun.oss.model.Bucket;
-import com.aliyun.oss.model.OSSObject;
-import com.aliyun.oss.model.ObjectMetadata;
+import com.aliyun.oss.model.*;
 import com.kb.common.exception.InfoException;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.IOUtils;
@@ -15,10 +13,9 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.net.URLEncoder;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -125,7 +122,68 @@ public class OSSUtils {
         }
 
     }
+    /**
+     * 分片
+     * @param bucketName
+     * @param file
+     * @param filename
+     * @return
+     * @throws Exception
+     */
+    public static String uploadPartFile(String bucketName, File file, String filename, OSSClient ossClient) throws Exception{
+        InitiateMultipartUploadRequest request = new InitiateMultipartUploadRequest(bucketName, filename);
+        // 初始化分片
+        InitiateMultipartUploadResult upresult = ossClient.initiateMultipartUpload(request);
+        // 返回uploadId，它是分片上传事件的唯一标识。您可以根据该uploadId发起相关的操作，例如取消分片上传、查询分片上传等。
+        String uploadId = upresult.getUploadId();
+        // partETags是PartETag的集合。PartETag由分片的ETag和分片号组成。
+        List<PartETag> partETags =  new ArrayList<PartETag>();
+        // 每个分片的大小，用于计算文件有多少个分片。单位为字节。1mb
+        final long partSize = 1 * 1024 * 1024L;
 
+
+        long fileLength = file.length();
+        int partCount = (int) (fileLength / partSize);
+        if (fileLength % partSize != 0) {
+            partCount++;
+        }
+        // 遍历分片上传。
+        for (int i = 0; i < partCount; i++) {
+            long startPos = i * partSize;
+            long curPartSize = (i + 1 == partCount) ? (fileLength - startPos) : partSize;
+            InputStream instream = null;
+            instream = new FileInputStream(file);
+            // 跳过已经上传的分片。
+            instream.skip(startPos);
+            UploadPartRequest uploadPartRequest = new UploadPartRequest();
+            uploadPartRequest.setBucketName(bucketName);
+            uploadPartRequest.setKey(filename);
+            uploadPartRequest.setUploadId(uploadId);
+            uploadPartRequest.setInputStream(instream);
+            // 设置分片大小。除了最后一个分片没有大小限制，其他的分片最小为100 KB。
+            uploadPartRequest.setPartSize(curPartSize);
+            // 设置分片号。每一个上传的分片都有一个分片号，取值范围是1~10000，如果超出此范围，OSS将返回InvalidArgument错误码。
+            uploadPartRequest.setPartNumber(i + 1);
+            // 每个分片不需要按顺序上传，甚至可以在不同客户端上传，OSS会按照分片号排序组成完整的文件。
+            UploadPartResult uploadPartResult = ossClient.uploadPart(uploadPartRequest);
+            // 每次上传分片之后，OSS的返回结果包含PartETag。PartETag将被保存在partETags中。
+            partETags.add(uploadPartResult.getPartETag());
+        }
+        CompleteMultipartUploadRequest completeMultipartUploadRequest =
+                new CompleteMultipartUploadRequest(bucketName,filename, uploadId, partETags);
+        // 如果需要在完成分片上传的同时设置文件访问权限，请参考以下示例代码。
+        // completeMultipartUploadRequest.setObjectACL(CannedAccessControlList.Private);
+        // 指定是否列举当前UploadId已上传的所有Part。如果通过服务端List分片数据来合并完整文件时，以上CompleteMultipartUploadRequest中的partETags可为null。
+        // Map<String, String> headers = new HashMap<String, String>();
+        // 如果指定了x-oss-complete-all:yes，则OSS会列举当前UploadId已上传的所有Part，然后按照PartNumber的序号排序并执行CompleteMultipartUpload操作。
+        // 如果指定了x-oss-complete-all:yes，则不允许继续指定body，否则报错。
+        // headers.put("x-oss-complete-all","yes");
+        // completeMultipartUploadRequest.setHeaders(headers);
+
+        // 完成分片上传。
+        CompleteMultipartUploadResult completeMultipartUploadResult = ossClient.completeMultipartUpload(completeMultipartUploadRequest);
+        return filename;
+    }
 
     public static InputStream getFileDefect(OSSClient ossClient, HttpServletResponse response,String bucketName,String folder,String fileName){
         try {
