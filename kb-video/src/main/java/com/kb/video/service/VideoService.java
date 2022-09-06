@@ -1,8 +1,8 @@
 package com.kb.video.service;
 
-import com.kb.search.pojo.search.Video;
 import com.kb.video.dao.VideoDao;
 import com.kb.video.feign.SearchFeign;
+import com.kb.video.feign.feignDto.Video;
 import com.kb.video.pojo.VideoInfo;
 import org.springframework.stereotype.Service;
 

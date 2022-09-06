@@ -6,7 +6,7 @@ spring:
   cloud:
     nacos:
       config:
-        server-addr: 8.140.48.121:8848
+        server-addr: 125.124.239.191:8848
         file-extension: yml
 spring.main.allow-bean-definition-overriding: true
 # 单个文件大小为1024MB

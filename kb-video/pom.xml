@@ -66,13 +66,6 @@
             <artifactId>springfox-bean-validators</artifactId>
             <version>2.7.0</version>
         </dependency>
-        <!--search-->
-        <dependency>
-            <groupId>com.kb</groupId>
-            <artifactId>kb-search</artifactId>
-            <version>1.0-SNAPSHOT</version>
-            <scope>compile</scope>
-        </dependency>
 
     </dependencies>
 
