@@ -75,6 +75,8 @@ public class FileController {
         }
 
     }
+
+
     public static File multipartFileToFile(MultipartFile multiFile) {
         // 获取文件名
         String fileName = multiFile.getOriginalFilename();
@@ -90,6 +92,30 @@ public class FileController {
             e.printStackTrace();
         }
         return null;
+    }
+
+    @PostMapping("uploadPart")
+    public BaseResponse uploadPartVideo(MultipartFile file){
+        OSSClient ossClient= OSSUtils.getOSSClient(endpoint,accessKeyId,accessKeySecret);
+        final File sampleFile = multipartFileToFile(file);
+        try {
+            String fileName=OSSUtils.uploadPartFile(bucketName,sampleFile,file.getOriginalFilename(),ossClient);
+        } catch (Exception e) {
+            return BaseResponse.failed("请重试");
+        }
+        return BaseResponse.success(file.getOriginalFilename());
+    }
+
+    @PostMapping("uploadRequest")
+    public BaseResponse uploadRequest(MultipartFile file){
+        OSSClient ossClient= OSSUtils.getOSSClient(endpoint,accessKeyId,accessKeySecret);
+        final File sampleFile = multipartFileToFile(file);
+        try {
+            String fileName=OSSUtils.uploadFileRequestFile(bucketName,sampleFile,file.getOriginalFilename(),ossClient);
+        } catch (Throwable e) {
+            return BaseResponse.failed("请重试");
+        }
+        return BaseResponse.success(file.getOriginalFilename());
     }
 
     @GetMapping("/getFile")
