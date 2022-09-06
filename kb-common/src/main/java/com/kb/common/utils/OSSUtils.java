@@ -122,6 +122,7 @@ public class OSSUtils {
         }
 
     }
+
     /**
      * 分片
      * @param bucketName
@@ -183,6 +184,32 @@ public class OSSUtils {
         // 完成分片上传。
         CompleteMultipartUploadResult completeMultipartUploadResult = ossClient.completeMultipartUpload(completeMultipartUploadRequest);
         return filename;
+    }
+
+    /**
+     * 断点续传
+     * @return
+     */
+    public static String uploadFileRequestFile(String bucketName,File file,String fileName,OSSClient ossClient) throws Throwable {
+        ObjectMetadata meta = new ObjectMetadata();
+        UploadFileRequest uploadFileRequest=new UploadFileRequest(bucketName,fileName);
+        uploadFileRequest.setUploadFile(file.getPath());
+        // 指定上传并发线程数，默认值为1。
+        uploadFileRequest.setTaskNum(1);
+        // 指定上传的分片大小，单位为字节，取值范围为100 KB~5 GB。默认值为100 KB。
+        uploadFileRequest.setPartSize(1 * 1024 * 1024);
+        // 开启断点续传，默认关闭。
+        uploadFileRequest.setEnableCheckpoint(true);
+        // 记录本地分片上传结果的文件。上传过程中的进度信息会保存在该文件中，如果某一分片上传失败，再次上传时会根据文件中记录的点继续上传。上传完成后，该文件会被删除。
+        // 如果未设置该值，默认与待上传的本地文件同路径，名称为${uploadFile}.ucp。
+        uploadFileRequest.setCheckpointFile("checkpointFile");
+        // 文件的元数据。
+        uploadFileRequest.setObjectMetadata(meta);
+        // 设置上传回调，参数为Callback类型。
+        //uploadFileRequest.setCallback("yourCallbackEvent");
+        // 断点续传上传。
+        ossClient.uploadFile(uploadFileRequest);
+        return fileName;
     }
 
     public static InputStream getFileDefect(OSSClient ossClient, HttpServletResponse response,String bucketName,String folder,String fileName){
