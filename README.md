@@ -14,7 +14,6 @@ KaiBai 是一个基于 Spring Cloud + VUE 开发的弹幕视频网站，出于�
 - 基于 ElaticSearch 实现的全局搜索
 - 基于 Jenkins + Docker + GitHub 实现的自动化部署
 
-[KaiBai前端](https://github.com/csuft-Exceptions/kb-FE) (暂未完工)
 #### 项目结构
 
 ```
