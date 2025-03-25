@@ -1,10 +1,6 @@
-<div align=center>
-    <img src="https://picmwz.oss-cn-hangzhou.aliyuncs.com/logo%E9%85%8D%E8%89%B2%E5%9B%BE.png" width="275"  alt="KaiBai"/>
-</div>
-
 #### 项目介绍
 
-KaiBai 是一个基于 Spring Cloud + VUE 开发的弹幕视频网站，出于兴趣和学习的目的开发了此项目，后续仍会更新。
+KaiBai 是一个基于 Spring Cloud + VUE 开发的弹幕视频网站，出于兴趣和学习的目的开发了此项目。
 
 - 后端 RESTful 风格的 API 设计。
 - 支持视频投稿，播放，发送弹幕，点赞收藏，转发，评论，以及视频排行等。
