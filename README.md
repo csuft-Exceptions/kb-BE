@@ -1,57 +1,49 @@
-#### 项目介绍
+﻿# KaiBai 后端项目
 
-KaiBai 是一个基于 Spring Cloud + VUE 开发的弹幕视频网站，出于兴趣和学习的目的开发了此项目。
+## 项目简介
+KaiBai 是一个基于 Spring Cloud 的弹幕视频平台后端项目，采用微服务架构实现用户、视频、搜索、认证、网关等核心能力。
 
-- 后端 RESTful 风格的 API 设计。
-- 支持视频投稿，播放，发送弹幕，点赞收藏，转发，评论，以及视频排行等。
-- 支持关注用户，获取关注动态等。
-- 基于 JWT + Redis 实现身份认证,并支持 GitHub 登录。
-- 基于 RBAC 实现的权限控制
-- 基于 ElaticSearch 实现的全局搜索
-- 基于 Jenkins + Docker + GitHub 实现的自动化部署
+## 核心能力
+- 提供 RESTful API。
+- 支持视频上传、播放、弹幕、评论、点赞、收藏、排行榜。
+- 支持用户关注与动态订阅。
+- 基于 OAuth2 + JWT + Redis 的认证方案。
+- 基于 Elasticsearch 的检索能力。
 
-#### 项目结构
-
+## 项目结构
+```text
+kb-BE
+├─ kb-common    公共组件
+├─ kb-file      文件与评论服务
+├─ kb-gateway   网关服务
+├─ kb-oauth     认证服务
+├─ kb-search    搜索服务
+├─ kb-user      用户服务
+└─ kb-video     视频服务
 ```
-kb -- 父工程
-├── kb-common -- 通用模块
-├── kb-file -- 基于 Aliyun OSS 构建的文件微服务
-├── kb-gateway -- 基于 Spring Cloud Gateway 构建的网关服务
-├── kb-oauth -- 基于 Spring Cloud Oauth 构建的认证服务
-├── kb-search -- 基于 Elasticsearch 构建的搜索微服务
-├── kb-user -- 用户中心微服务
-└── kb-video -- 视频中心微服务
+
+## 技术栈
+- Spring Boot
+- Spring Cloud
+- Nacos
+- Redis
+- MyBatis / MyBatis-Plus
+- Elasticsearch
+- RocketMQ
+- Docker
+- Jenkins
+
+## 构建与运行
+```bash
+mvn clean install -DskipTests
 ```
 
-#### 技术选型
+按模块启动时，可进入对应目录执行：
+```bash
+mvn spring-boot:run
+```
 
-| 技术                 | 说明                      |
-| -------------------- | ------------------------- |
-| Spring Boot          | Spring 应用快速开发脚手架 |
-| Spring Cloud         | 微服务架构解决方案        |
-| Nacos                | 注册中心和配置中心        |
-| Sentinel             | 限流/熔断/降级            |
-| Spring Cloud Gateway | 微服务网关                |
-| Spring Cloud Oauth   | 微服务鉴权         |
-| MyBatis              | 持久层 ORM 框架           |
-| PageHelper           | MyBatis 分页插件          |
-| JJWT                 | JWT 登录支持              |
-| Redis Cluster        | Redis集群方案             |
-| Elasticsearch        | 搜索引擎                  |
-| RocketMQ             | 消息队列                  |
-| Aliyun OSS           | 阿里云对象存储服务        |
-| MySQL                | 数据库服务                |
-| Lombok               | 简化对象封装工具          |
-| Swagger              | API 文档生成工具          |
-| Jenkins              | 持续集成工具              |
-| Docker               | 应用容器引擎              |
-| Jave                 | 视频处理工具              |
-| Nginx                | 反向代理web服务器         |
-
-
-##### 2022-09-06
-新增分片上传和断点续传,优化client连接
-##### 2026-04-24
-- Updated README maintenance notes.
-- Removed comments from non-directory files under kb-search (excluding README.md).
-- Removed comments from all MavenWrapperDownloader.java files.
+## 维护记录
+### 2026-04-24
+- 清理部分历史注释与冲突标记。
+- 调整文档与构建脚本结构。
