@@ -79,6 +79,8 @@
             t_user_following
         where
             following_id=#{followingId,jdbcType=BIGINT}
+        and
+            delete_state=0
     </select>
 
     <select id="followingCount" resultType="java.lang.Long">
@@ -88,5 +90,7 @@
                 t_user_following
         where
                 user_id=#{userId,jdbcType=BIGINT}
+        and
+                delete_state=0
     </select>
 </mapper>

@@ -14,21 +14,21 @@ import org.springframework.stereotype.Service;
 public class PermissionServiceImpl implements PermissionService {
     @Override
     public BaseResponse add(Permission permission) {
-        return null;
+        return BaseResponse.failed("权限服务暂未实现");
     }
 
     @Override
     public BaseResponse update(Permission permission) {
-        return null;
+        return BaseResponse.failed("权限服务暂未实现");
     }
 
     @Override
     public BaseResponse delete(Integer[] ids) {
-        return null;
+        return BaseResponse.failed("权限服务暂未实现");
     }
 
     @Override
     public BaseResponse addPermission(Integer roleId, Integer[] ids) {
-        return null;
+        return BaseResponse.failed("权限服务暂未实现");
     }
 }

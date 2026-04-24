@@ -25,8 +25,10 @@ public class LikeService {
     }
 
     public Long getLikes(Long videoId) {
-
-        return Long.valueOf(redisTemplate.opsForHash().get("like", videoId).toString());
-
+        Object value = redisTemplate.opsForHash().get("like", videoId);
+        if (value == null) {
+            return 0L;
+        }
+        return Long.valueOf(String.valueOf(value));
     }
 }

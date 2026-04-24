@@ -16,6 +16,8 @@ import java.util.concurrent.TimeUnit;
 @Component
 public class RedisToken {
 
+    private static final String TOKEN_CACHE_PREFIX = "user_key:";
+
     @Autowired
     private RedisTemplate redisTemplate;
     /**
@@ -26,7 +28,7 @@ public class RedisToken {
      * @return
      */
     public boolean saveTokenToRedis(String accessToken, String value, long ttl) {
-        String key = "user_key:"+accessToken;
+        String key = TOKEN_CACHE_PREFIX + accessToken;
         redisTemplate.opsForValue().set(key,value,ttl, TimeUnit.SECONDS);
         Long expire = redisTemplate.getExpire(key, TimeUnit.SECONDS);
         return expire>0;
@@ -37,7 +39,7 @@ public class RedisToken {
      * @param token
      */
     public boolean delToken(String token){
-        String key = "user_key"+token;
+        String key = TOKEN_CACHE_PREFIX + token;
         return redisTemplate.delete(key);
     }
 
@@ -47,8 +49,11 @@ public class RedisToken {
      * @return
      */
     public AuthToken getToken(String token){
-        String key = "user_key" + token;
+        String key = TOKEN_CACHE_PREFIX + token;
         String value = (String) redisTemplate.opsForValue().get(key);
+        if (value == null) {
+            return null;
+        }
         AuthToken authToken = JSON.parseObject(value, AuthToken.class);
         return authToken;
     }

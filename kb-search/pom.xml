@@ -14,7 +14,7 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
     <dependencies>
-        <!--common-->
+        
         <dependency>
             <groupId>com.kb</groupId>
             <artifactId>kb-common</artifactId>
@@ -40,7 +40,7 @@
                         </goals>
                     </execution>
                 </executions>
-                <!--构建镜像之后的镜像信息-->
+                
                 <configuration>
                     <repository>${project.artifactId}</repository>
                     <tag>${project.version}</tag>
@@ -52,7 +52,7 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <!--加入下面两项配置-->
+                
                 <executions>
                     <execution>
                         <goals>

@@ -33,8 +33,8 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     public BaseResponse getSecondComment(SecondCommentParam secondCommentParam) {
-        List<Comment> list=commentMapper.getSecondComment(secondCommentParam);
         PageHelper.startPage(secondCommentParam.getPage(),secondCommentParam.getLimit());
+        List<Comment> list=commentMapper.getSecondComment(secondCommentParam);
         PageInfo<Comment> pageInfo=new PageInfo<>(list);
         return BaseResponse.success(pageInfo.getList(),pageInfo.getList().size());
     }

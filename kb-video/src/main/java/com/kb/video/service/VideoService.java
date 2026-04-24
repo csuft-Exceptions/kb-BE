@@ -46,6 +46,7 @@ public class VideoService {
     private Video buildVideo(VideoInfo videoInfo) {
         Video video = new Video();
 
+        video.setId(videoInfo.getId());
         video.setName(videoInfo.getName());
         video.setCategory(videoInfo.getCategory());
         video.setCreateTime(videoInfo.getCreateTime());

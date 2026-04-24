@@ -42,8 +42,8 @@ public class UserCollectionServiceImpl implements UserCollectionService {
 
     @Override
     public BaseResponse list(UserCollectionParam userCollectionParam) {
-        List<UserCollection> list=userCollectionMapper.list(userCollectionParam);
         PageHelper.startPage(userCollectionParam.getPage(),userCollectionParam.getLimit());
+        List<UserCollection> list=userCollectionMapper.list(userCollectionParam);
         PageInfo<UserCollection> pageInfo=new PageInfo<>(list);
         return BaseResponse.success(pageInfo.getList(),pageInfo.getList().size());
     }

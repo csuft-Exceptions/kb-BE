@@ -50,6 +50,8 @@ kb -- 父工程
 
 
 ##### 2022-09-06
-新增分片上传和断点续传,优化client连接 
-
- 
+新增分片上传和断点续传,优化client连接
+##### 2026-04-24
+- Updated README maintenance notes.
+- Removed comments from non-directory files under kb-search (excluding README.md).
+- Removed comments from all MavenWrapperDownloader.java files.

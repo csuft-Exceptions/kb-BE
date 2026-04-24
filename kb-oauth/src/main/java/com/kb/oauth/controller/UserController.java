@@ -1,13 +1,14 @@
 package com.kb.oauth.controller;
 
-import org.springframework.security.core.Authentication;
+import com.kb.common.base.BaseResponse;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jwts;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import java.nio.charset.StandardCharsets;
-import io.jsonwebtoken.Jwts;
 
 /**
  * @author yk
@@ -18,15 +19,28 @@ import io.jsonwebtoken.Jwts;
 @RequestMapping("/user")
 public class UserController {
 
+    private static final String AUTHORIZATION = "Authorization";
+    private static final String BEARER_PREFIX = "Bearer ";
+    private static final String SIGN_KEY = "KaiBai_key";
+
     @GetMapping("/getCurrentUser")
-    public Object getCurrentUser(Authentication authentication, HttpServletRequest request) {
-        String header = request.getHeader("Authorization");
-        String token = header+"bearer";
-
-        return Jwts.parser()
-                .setSigningKey("test_key".getBytes(StandardCharsets.UTF_8))
-                .parseClaimsJws(token)
-                .getBody();
+    public BaseResponse getCurrentUser(HttpServletRequest request) {
+        String header = request.getHeader(AUTHORIZATION);
+        if (header == null || !header.startsWith(BEARER_PREFIX)) {
+            return BaseResponse.failed("无效的Authorization头");
+        }
+        String token = header.substring(BEARER_PREFIX.length()).trim();
+        if (token.isEmpty()) {
+            return BaseResponse.failed("token不能为空");
+        }
+        try {
+            Claims claims = Jwts.parser()
+                    .setSigningKey(SIGN_KEY.getBytes(StandardCharsets.UTF_8))
+                    .parseClaimsJws(token)
+                    .getBody();
+            return BaseResponse.success(claims);
+        } catch (Exception e) {
+            return BaseResponse.failed("token无效");
+        }
     }
-
 }

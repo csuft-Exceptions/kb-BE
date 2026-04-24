@@ -92,12 +92,15 @@ public class AuthServiceImpl implements AuthService {
     public BaseResponse logout(HttpServletRequest request) {
         //获取cookie中的身份令牌
         String accessToken = cookieToken.getTokenFormCookie(request);
+        if (accessToken == null) {
+            return BaseResponse.failed("未登录");
+        }
         //删除Redis token
         boolean result = redisToken.delToken(accessToken);
         HttpServletResponse response = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getResponse();
         //清除cookie
         cookieToken.clearCookie(response,accessToken,cookieDomain);
-        return null;
+        return result ? BaseResponse.success("退出成功") : BaseResponse.failed("退出失败");
     }
 
     @Override

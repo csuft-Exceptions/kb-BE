@@ -41,8 +41,8 @@ public class UserFollowingServiceImpl implements UserFollowingService {
 
     @Override
     public BaseResponse list(UserFollowingParam userFollowingParam) {
-        List<UserFollowing> list=userFollowingMapper.list(userFollowingParam);
         PageHelper.startPage(userFollowingParam.getPage(),userFollowingParam.getLimit());
+        List<UserFollowing> list=userFollowingMapper.list(userFollowingParam);
         PageInfo<UserFollowing> pageInfo=new PageInfo<>(list);
         return BaseResponse.success(pageInfo.getList(),pageInfo.getList().size());
     }
