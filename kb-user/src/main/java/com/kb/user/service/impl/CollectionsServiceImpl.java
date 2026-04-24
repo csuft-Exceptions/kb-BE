@@ -25,40 +25,40 @@ public class CollectionsServiceImpl implements CollectionsService {
 
     @Override
     public BaseResponse list(Long userId) {
-        List<Collections> list =collectionsMapper.list(userId);
-        return BaseResponse.success(list,list.size());
+        List<Collections> list = collectionsMapper.list(userId);
+        return BaseResponse.success(list, list.size());
     }
 
     @Override
     public BaseResponse add(Collections collections) {
-        Integer count=collectionsMapper.add(collections);
-        AssertUtil.assertNotEquals(1,count,"添加收藏夹操作失败,请重试!");
+        Integer count = collectionsMapper.add(collections);
+        AssertUtil.assertNotEquals(1, count, "添加收藏夹操作失败,请重试!");
         return BaseResponse.success("添加收藏夹成功!");
     }
 
     @Override
     public BaseResponse update(Collections collections) {
-        AssertUtil.isTrue(collections.getType()==0,"公共类型不能更新");
-        Integer count=collectionsMapper.update(collections);
-        AssertUtil.assertNotEquals(1,count,"更新操作失败,请重试!");
+        AssertUtil.assertNull(collections.getType(), "收藏夹类型不能为空");
+        AssertUtil.isTrue(Integer.valueOf(0).equals(collections.getType()), "公共类型不能更新");
+        Integer count = collectionsMapper.update(collections);
+        AssertUtil.assertNotEquals(1, count, "更新操作失败,请重试!");
         return BaseResponse.success("更新成功!");
     }
 
     @Override
     public BaseResponse delete(Long id) {
-        AssertUtil.assertNull(id,"分组不存在");
-        Collections temp=collectionsMapper.detail(id);
-        AssertUtil.assertNull(temp,"分组不存在");
-        AssertUtil.isTrue(temp.getType()==0,"公共类型不能删除");
-
-        Integer count=collectionsMapper.delete(id);
-        AssertUtil.assertNotEquals(1,count,"删除操作失败,请重试!");
+        AssertUtil.assertNull(id, "分组不存在");
+        Collections temp = collectionsMapper.detail(id);
+        AssertUtil.assertNull(temp, "分组不存在");
+        AssertUtil.isTrue(Integer.valueOf(0).equals(temp.getType()), "公共类型不能删除");
+        Integer count = collectionsMapper.delete(id);
+        AssertUtil.assertNotEquals(1, count, "删除操作失败,请重试!");
         return BaseResponse.success("删除成功!");
     }
 
     @Override
     public BaseResponse detail(Long id) {
-        Collections collections=collectionsMapper.detail(id);
+        Collections collections = collectionsMapper.detail(id);
         return BaseResponse.success(collections);
     }
 }

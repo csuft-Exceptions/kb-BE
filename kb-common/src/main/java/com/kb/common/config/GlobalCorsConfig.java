@@ -15,7 +15,7 @@ public class GlobalCorsConfig {
         //1) 允许的域,不要写*，否则cookie就无法使用了
         config.addAllowedOrigin("*");
         //2) 是否发送Cookie信息
-        config.setAllowCredentials(true);
+        config.setAllowCredentials(false);
         //3) 允许的请求方式
         config.addAllowedMethod("OPTIONS");
         config.addAllowedMethod("HEAD");

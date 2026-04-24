@@ -22,7 +22,7 @@ import java.util.Set;
  * @date 2022-07-24 - 18:17
  */
 @RestController
-@Api("排行相关")
+@Api("排行榜相关")
 @Slf4j
 public class RateController {
 
@@ -31,14 +31,14 @@ public class RateController {
 
     @Resource
     private VideoMapper videoMapper;
+
     @GetMapping("/top")
     @ApiOperation("top10")
     public BaseResponse top() {
-        Set<String> set=redisTemplate.opsForZSet().reverseRange("topZSet", 1, 10);
-        List<VideoInfo> list=new ArrayList<>();
-      //  log.info(set.toString());
-        AssertUtil.assertEmptyCollection(set,"暂无排行信息");
-        for(String id:set){
+        Set<String> set = redisTemplate.opsForZSet().reverseRange("topZSet", 0, 9);
+        List<VideoInfo> list = new ArrayList<>();
+        AssertUtil.assertEmptyCollection(set, "暂无排行信息");
+        for (String id : set) {
             list.add(videoMapper.selectById(id));
             log.info(id);
         }
@@ -48,8 +48,13 @@ public class RateController {
     @GetMapping("/topCategory")
     @ApiOperation("分类top10")
     public BaseResponse top(Integer category) {
-        redisTemplate.opsForZSet().reverseRange("topZSet" + category, 1, 10);
-        return null;
+        Set<String> set = redisTemplate.opsForZSet().reverseRange("topZSet" + category, 0, 9);
+        List<VideoInfo> list = new ArrayList<>();
+        AssertUtil.assertEmptyCollection(set, "暂无排行信息");
+        for (String id : set) {
+            list.add(videoMapper.selectById(id));
+        }
+        return BaseResponse.success(list);
     }
 
 }

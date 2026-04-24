@@ -14,21 +14,21 @@ import org.springframework.stereotype.Service;
 public class RoleServiceImpl implements RoleService {
     @Override
     public BaseResponse addRoles(Role role) {
-        return null;
+        return BaseResponse.failed("角色服务暂未实现");
     }
 
     @Override
     public BaseResponse update(Role role) {
-        return null;
+        return BaseResponse.failed("角色服务暂未实现");
     }
 
     @Override
     public BaseResponse deleteRole(Integer[] ids) {
-        return null;
+        return BaseResponse.failed("角色服务暂未实现");
     }
 
     @Override
     public BaseResponse addGrant(Integer roleId, Integer[] ids) {
-        return null;
+        return BaseResponse.failed("角色服务暂未实现");
     }
 }
